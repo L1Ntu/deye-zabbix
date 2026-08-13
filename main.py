@@ -6,8 +6,8 @@ from json import dumps
 
 params = dict(enumerate(argv))
 INVERTER_IP = params.get(1)
-INVERTER_PORT = int(params.get(2))
-LOGGER_SN = int(params.get(3))
+INVERTER_PORT = int(params.get(2)) if params.get(2) else None
+LOGGER_SN = int(params.get(3)) if params.get(3) else None
 
 
 def main():
