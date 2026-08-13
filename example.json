@@ -1,0 +1,315 @@
+{
+  "0": {
+    "address": 0,
+    "description": "device_type",
+    "value": "Hybrid3Phase",
+    "suffix": ""
+  },
+  "3": {
+    "address": 3,
+    "description": "inverter_serial",
+    "value": "2401190626",
+    "suffix": ""
+  },
+  "101": {
+    "address": 101,
+    "description": "batt_float_v",
+    "value": 55.2,
+    "suffix": "V"
+  },
+  "102": {
+    "address": 102,
+    "description": "batt_capacity",
+    "value": 279,
+    "suffix": "Ah"
+  },
+  "103": {
+    "address": 103,
+    "description": "batt_empty_v",
+    "value": 45.0,
+    "suffix": "V"
+  },
+  "121": {
+    "address": 121,
+    "description": "gen_max_working_time",
+    "value": 12.0,
+    "suffix": "h"
+  },
+  "142": {
+    "address": 142,
+    "description": "work_mode",
+    "value": "ZeroExportToLoad",
+    "suffix": ""
+  },
+  "216": {
+    "address": 216,
+    "description": "bms_battery_current",
+    "value": 0,
+    "suffix": "A"
+  },
+  "217": {
+    "address": 217,
+    "description": "bms_battery_temp",
+    "value": 33.7,
+    "suffix": "\u00b0C"
+  },
+  "500": {
+    "address": 500,
+    "description": "inverter_state",
+    "value": 2,
+    "suffix": ""
+  },
+  "501": {
+    "address": 501,
+    "description": "active_power_today",
+    "value": 0.0,
+    "suffix": "kWh"
+  },
+  "514": {
+    "address": 514,
+    "description": "battery_charge_today",
+    "value": 23.7,
+    "suffix": "kWh"
+  },
+  "515": {
+    "address": 515,
+    "description": "battery_discharge_today",
+    "value": 7.9,
+    "suffix": "kWh"
+  },
+  "516": {
+    "address": 516,
+    "description": "battery_charge_total",
+    "value": 1474.9,
+    "suffix": "kWh"
+  },
+  "518": {
+    "address": 518,
+    "description": "battery_discharge_total",
+    "value": 1333.0,
+    "suffix": "kWh"
+  },
+  "520": {
+    "address": 520,
+    "description": "today_bought_from_grid",
+    "value": 24.4,
+    "suffix": "kWh"
+  },
+  "521": {
+    "address": 521,
+    "description": "today_sold_to_grid",
+    "value": 0.0,
+    "suffix": "kWh"
+  },
+  "529": {
+    "address": 529,
+    "description": "today_from_pv",
+    "value": 0.0,
+    "suffix": "kWh"
+  },
+  "534": {
+    "address": 534,
+    "description": "total_from_pv",
+    "value": 0.0,
+    "suffix": "kWh"
+  },
+  "536": {
+    "address": 536,
+    "description": "today_from_generator",
+    "value": 29.3,
+    "suffix": "kWh"
+  },
+  "537": {
+    "address": 537,
+    "description": "total_from_generator",
+    "value": 817.3,
+    "suffix": "kWh"
+  },
+  "539": {
+    "address": 539,
+    "description": "generator_worktime_today",
+    "value": 8.5,
+    "suffix": "hours"
+  },
+  "552": {
+    "address": 552,
+    "description": "ac_relays",
+    "value": {
+      "Inverter": 1,
+      "Grid": 1,
+      "Generator": 0,
+      "GridPower": 0,
+      "DryContact-1": 0,
+      "DryContact-2": 0
+    },
+    "suffix": ""
+  },
+  "586": {
+    "address": 586,
+    "description": "battery_temperature",
+    "value": 13.37,
+    "suffix": "\u00b0C"
+  },
+  "588": {
+    "address": 588,
+    "description": "battery_soc",
+    "value": 99.0,
+    "suffix": "%"
+  },
+  "590": {
+    "address": 590,
+    "description": "battery_out_power",
+    "value": -33,
+    "suffix": "W"
+  },
+  "591": {
+    "address": 591,
+    "description": "battery_out_current",
+    "value": -0.41,
+    "suffix": "A"
+  },
+  "598": {
+    "address": 598,
+    "description": "grid_phase_A_volt",
+    "value": 238.3,
+    "suffix": "V"
+  },
+  "599": {
+    "address": 599,
+    "description": "grid_phase_B_volt",
+    "value": 237.7,
+    "suffix": "V"
+  },
+  "600": {
+    "address": 600,
+    "description": "grid_phase_C_volt",
+    "value": 234.4,
+    "suffix": "V"
+  },
+  "604": {
+    "address": 604,
+    "description": "grid_phase_A_in_power",
+    "value": 339,
+    "suffix": "W"
+  },
+  "605": {
+    "address": 605,
+    "description": "grid_phase_B_in_power",
+    "value": 342,
+    "suffix": "W"
+  },
+  "606": {
+    "address": 606,
+    "description": "grid_phase_C_in_power",
+    "value": 350,
+    "suffix": "W"
+  },
+  "610": {
+    "address": 610,
+    "description": "grid_phase_A_in_current",
+    "value": 1.53,
+    "suffix": "A"
+  },
+  "611": {
+    "address": 611,
+    "description": "grid_phase_B_in_current",
+    "value": 1.55,
+    "suffix": "A"
+  },
+  "612": {
+    "address": 612,
+    "description": "grid_phase_C_in_current",
+    "value": 4.0,
+    "suffix": "A"
+  },
+  "625": {
+    "address": 625,
+    "description": "grid_total_power",
+    "value": 1031,
+    "suffix": "W"
+  },
+  "640": {
+    "address": 640,
+    "description": "ups_phase_A_power",
+    "value": 113,
+    "suffix": "W"
+  },
+  "641": {
+    "address": 641,
+    "description": "ups_phase_B_power",
+    "value": 118,
+    "suffix": "W"
+  },
+  "642": {
+    "address": 642,
+    "description": "ups_phase_C_power",
+    "value": 679,
+    "suffix": "W"
+  },
+  "643": {
+    "address": 643,
+    "description": "ups_total_power",
+    "value": 910,
+    "suffix": "W"
+  },
+  "644": {
+    "address": 644,
+    "description": "load_phase_A_volt",
+    "value": 238.3,
+    "suffix": "V"
+  },
+  "645": {
+    "address": 645,
+    "description": "load_phase_B_volt",
+    "value": 238.3,
+    "suffix": "V"
+  },
+  "646": {
+    "address": 646,
+    "description": "load_phase_C_volt",
+    "value": 233.6,
+    "suffix": "V"
+  },
+  "653": {
+    "address": 653,
+    "description": "load_total_power",
+    "value": 910,
+    "suffix": "W"
+  },
+  "676": {
+    "address": 676,
+    "description": "pv1_volt",
+    "value": 3.2,
+    "suffix": "V"
+  },
+  "677": {
+    "address": 677,
+    "description": "pv1_current",
+    "value": 0.0,
+    "suffix": "A"
+  },
+  "678": {
+    "address": 678,
+    "description": "pv2_volt",
+    "value": 2.4,
+    "suffix": "V"
+  },
+  "679": {
+    "address": 679,
+    "description": "pv2_current",
+    "value": 0.0,
+    "suffix": "A"
+  },
+  "680": {
+    "address": 680,
+    "description": "pv3_volt",
+    "value": 0.0,
+    "suffix": "V"
+  },
+  "681": {
+    "address": 681,
+    "description": "pv3_current",
+    "value": 0.0,
+    "suffix": "A"
+  }
+}
