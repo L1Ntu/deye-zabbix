@@ -1,4 +1,5 @@
 from sys import argv
+from time import sleep
 from pysolarmanv5 import PySolarmanV5
 from deye_controller.utils import group_registers, map_response
 from deye_controller.modbus.protocol import HoldingRegisters
@@ -28,6 +29,7 @@ def main():
         # Basic info
         'DeviceType',
         'SerialNumber',
+        'RatedPower',
         'InverterWorkMode',
         'RunState',
         'ACRelays',
@@ -40,6 +42,7 @@ def main():
         'TotalFromGenerator',
         'TodayGeneratorWorkTime',
         'GeneratorWorkingTime',
+        'Fault',
 
         # Solar panels
         'PV1Voltage',
@@ -109,6 +112,9 @@ def main():
                     'value': reg.format(),
                     'suffix': suffix
                 }
+
+            # sleep is needed to avoid timeouts
+            sleep(0.1)
 
         print(dumps(result))
     except Exception as e:
