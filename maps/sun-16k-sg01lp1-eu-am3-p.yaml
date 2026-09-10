@@ -1,0 +1,226 @@
+registers:
+  # solar
+
+  pv1_power:
+    name: PV1 Power
+    address: 186
+    unit: W
+    scale: 1
+    type: U_WORD
+
+  pv2_power:
+    name: PV2 Power
+    address: 187
+    unit: W
+    scale: 1
+    type: U_WORD
+
+  pv1_voltage:
+    name: PV1 Voltage
+    address: 109
+    unit: V
+    scale: 0.1
+    type: U_WORD
+
+  pv2_voltage:
+    name: PV2 Voltage
+    address: 111
+    unit: V
+    scale: 0.1
+    type: U_WORD
+
+  pv1_current:
+    name: PV1 Current
+    address: 110
+    description: Photovoltaic 1 current
+    unit: A
+    scale: 0.1
+    type: U_WORD
+
+  pv2_current:
+    name: PV2 Current
+    address: 112
+    unit: A
+    scale: 0.1
+    type: U_WORD
+
+  # energy
+
+  daily_production:
+    name: Daily Production
+    address: 108
+    unit: kWh
+    scale: 0.1
+    type: U_WORD
+
+  total_production:
+    name: Total Production
+    address:
+      low: 96
+      high: 97
+    unit: kWh
+    scale: 0.1
+    type: U_WORD
+
+  today_energy_bought:
+    name: Today Energy Bought
+    address: 76
+    unit: kWh
+    scale: 0.1
+    type: U_WORD
+
+  today_energy_sold:
+    name: Today Energy Sold
+    address: 77
+    unit: kWh
+    scale: 0.1
+    type: U_WORD
+
+  total_energy_bought:
+    name: Total Energy Bought
+    address: 78
+    unit: kWh
+    scale: 0.1
+    type: U_WORD
+
+  total_energy_sold:
+    name: Total Energy Sold
+    address: 81
+    unit: kWh
+    scale: 0.1
+    type: U_WORD
+
+  # grid
+
+  grid_voltage_l1:
+    name: Grid Voltage L1
+    address: 150
+    unit: V
+    scale: 0.1
+    type: U_WORD
+
+  grid_voltage_l2:
+    name: Grid Voltage L2
+    address: 151
+    unit: V
+    scale: 0.1
+    type: U_WORD
+
+  grid_power:
+    name: Grid Power
+    address: 169
+    description: "- export, + import"
+    unit: W
+    scale: 10
+    type: S_WORD
+
+  grid_current_l1:
+    name: Grid Current L1
+    address: 164
+    unit: A
+    scale: 0.1
+    type: S_WORD
+
+  grid_current_l2:
+    name: Grid Current L2
+    address: 165
+    unit: A
+    scale: 0.1
+    type: S_WORD
+
+  grid_connected_status:
+    name: Grid Connected Status
+    address: 194
+    unit:
+    scale: 1
+    type: S_WORD
+
+# battery
+
+  battery_temperature:
+    name: Battery Temperature
+    address: 182
+    unit: °C
+    scale: 0.1
+    offset: 1000
+    type: U_WORD
+
+  battery_voltage:
+    name: "Battery Voltage"
+    address: 183
+    unit: V
+    scale: 0.01
+    type: U_WORD
+
+  battery_soc:
+    name: Battery SOC
+    address: 184
+    unit: "%"
+    scale: 1
+    type: U_WORD
+
+  battery_power:
+    name: Battery Power
+    note: "- charge ; + discharge"
+    address: 190
+    unit: W
+    scale: 1
+    type: S_WORD
+
+  battery_current:
+    name: Battery Current
+    note: "- charge ; + discharge"
+    address: 191
+    unit: A
+    scale: 0.01
+    type: S_WORD
+
+  battery_charge_total:
+    name: Battery Charge Total
+    address:
+      low: 72
+      high: 73
+    unit: kWh
+    scale: 0.1
+    type: U_DWORD
+
+  battery_discharge_total:
+    name: Battery Discharge Total
+    address:
+      low: 74
+      high: 75
+    unit: kWh
+    scale: 0.1
+    type: U_DWORD
+
+  battery_charge_daily:
+    name: Battery Charge Daily
+    address: 70
+    unit: kWh
+    scale: 0.1
+    type: U_WORD
+
+  battery_discharge_daily:
+    name: Battery Discharge Daily
+    address: 71
+    unit: kWh
+    scale: 0.1
+    type: U_WORD
+
+
+  # temperature
+
+  dc_temperature:
+    name: DC Temperature
+    address: 90
+    unit: °C
+    scale: 0.1
+    type: S_WORD
+
+  ac_temperature:
+    name: AC Temperature
+    address: 91
+    unit: °C
+    scale: 0.1
+    offset: 1000
+    type: S_WORD
