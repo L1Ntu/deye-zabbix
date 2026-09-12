@@ -5,9 +5,9 @@ zabbix_export:
       name: Templates
   templates:
     - uuid: c33a2416205d456a8d7be8f8cc2263f2
-      template: DEYE-16K-SG01LP1
-      name:  Deye 16K-SG01LP1 Inverter
-      description: 'Template for monitoring Deye hybrid inverter 16K-SG01LP1'
+      template: DEYE-16K-SG01LP1-EU
+      name:  Deye 16K-SG01LP1-EU Inverter
+      description: 'Template for monitoring Deye hybrid inverter 16K-SG01LP1-EU'
       groups:
         - name: Templates
       items:
@@ -19,6 +19,35 @@ zabbix_export:
           description: 'Raw JSON data from Python script'
           delay: '60'
           history: 7d
+
+        # General Data
+        - uuid: 7e43d4e6f8f749b1835225362987c88b
+          name: 'Serial Number'
+          type: DEPENDENT
+          key: 'deye.sg01lp1.serial'
+          value_type: TEXT
+          description: 'Device Serial Number'
+          master_item:
+            key: 'deye.16k-sg01lp1'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$.data.serial.value'
+
+        - uuid: ba87f7efc3dc479b8bc770fb9b67041f
+          name: 'Overall State'
+          type: DEPENDENT
+          key: 'deye.sg01lp1.state'
+          value_type: UNSIGNED
+          description: 'Device State (0=standby, 1=selftest, 2=normal, 3=alarm, 4=fault)'
+          valuemap:
+            name: 'Deye State'
+          master_item:
+            key: 'deye.16k-sg01lp1'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$.data.state.value'
 
         # PV Data
         - uuid: 77366ef9cfe54f8cbae99ab8235bba42
@@ -107,18 +136,32 @@ zabbix_export:
 
         # Energy Data
         - uuid: eaf77b7fa6e847b8bb63cfa99ae7693f
-          name: 'Daily Production'
+          name: 'Today Production'
           type: DEPENDENT
-          key: 'deye.sg01lp1.daily_production'
+          key: 'deye.sg01lp1.today_production'
           value_type: FLOAT
           units: kWh
-          description: 'Daily Energy Production'
+          description: 'Today Energy Production'
           master_item:
             key: 'deye.16k-sg01lp1'
           preprocessing:
             - type: JSONPATH
               parameters:
-                - '$.data.daily_production.value'
+                - '$.data.today_production.value'
+
+        - uuid: e8c178a0cc5d4f4a9cb5604bfe604620
+          name: 'Total Production'
+          type: DEPENDENT
+          key: 'deye.sg01lp1.total_production'
+          value_type: FLOAT
+          units: kWh
+          description: 'Total Energy Production'
+          master_item:
+            key: 'deye.16k-sg01lp1'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$.data.total_production.value'
 
         - uuid: 2fa30d3b197c4024846ea3af87e57fc6
           name: 'Today Energy Bought'
@@ -175,6 +218,21 @@ zabbix_export:
             - type: JSONPATH
               parameters:
                 - '$.data.total_energy_sold.value'
+
+        # AUX Data
+        - uuid: 1a6bef492c5c4ce6ba499dad60b659db
+          name: 'AUX Power'
+          type: DEPENDENT
+          key: 'deye.sg01lp1.aux_power'
+          value_type: FLOAT
+          units: W
+          description: 'AUX Power Output'
+          master_item:
+            key: 'deye.16k-sg01lp1'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$.data.aux_power.value'
 
         # Grid Data
         - uuid: 830c123b36074e49a0c68d140a4ec5bf
@@ -415,3 +473,20 @@ zabbix_export:
             - type: JSONPATH
               parameters:
                 - '$.data.ac_temperature.value'
+      valuemaps:
+        -
+          uuid: 630195889c074660a0e1c9eba1b6f597
+          name: 'Deye State'
+          mappings:
+            - value: '0'
+              newvalue: Standby
+            - value: '1'
+              newvalue: Selftest
+            - value: '2'
+              newvalue: Normal
+            - value: '3'
+              newvalue: Alarm
+            - value: '4'
+              newvalue: Fault
+            - value: ''
+              newvalue: Unknown

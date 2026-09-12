@@ -115,11 +115,21 @@ class DeyeReader:
 
         low = low_result[0]
         high = high_result[0]
-
-        # Собираем 32-bit значение
         value = (high << 16) | low
 
         return round(float(value * scale), 1)
+
+    def _read_serial_register(self, address: int) -> Optional[str]:
+        data = self._read_register(address, 5)
+        sn_bytes = bytearray()
+        for reg in data:
+            low_byte = reg & 0xFF
+            high_byte = reg >> 8 & 0xFF
+
+            sn_bytes.append(low_byte)
+            sn_bytes.append(high_byte)
+
+        return sn_bytes.decode('ascii', errors='ignore').strip()
 
     def read_all(self) -> Dict[str, Any]:
         if not self.client:
@@ -141,7 +151,9 @@ class DeyeReader:
             low_addr = reg_config.get('address').get('low', 0) if type(address) is dict else 0
             high_addr = reg_config.get('address').get('high', 0) if type(address) is dict else 0
 
-            if address_type == 'U_DWORD':
+            if address_type == 'SERIAL':
+                value = self._read_serial_register(address)
+            elif address_type == 'U_DWORD':
                 value = self._read_dword_register(low_addr, high_addr, reg_config['scale'])
             elif address_type == 'U_WORD':
                 value = self._read_single_register(reg_config)
@@ -156,7 +168,7 @@ class DeyeReader:
                     'value': value,
                     'unit': unit,
                     'address': f"{low_addr}" if type == 'U_DWORD' else address,
-                    'type': 'U_DWORD'
+                    'type': address_type
                 }
             else:
                 results['errors'].append(f"error reading {reg_key}, address = {low_addr}-{high_addr}")

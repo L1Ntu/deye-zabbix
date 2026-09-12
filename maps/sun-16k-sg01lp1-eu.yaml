@@ -1,5 +1,23 @@
 registers:
-  # solar
+
+  ####### GENERAL #######
+
+  serial:
+    name: Serial Number
+    address: 3
+    unit: ''
+    type: SERIAL
+
+  state:
+    name: Overal State
+    address: 59
+    unit: ''
+    scale: 1
+    type: S_WORD
+    note: '0 - standby ; 1 - selftest ; 2 - normal ; 3 - alarm ; 4 - fault'
+
+
+  ####### SOLAR #######
 
   pv1_power:
     name: PV1 Power
@@ -44,10 +62,11 @@ registers:
     scale: 0.1
     type: U_WORD
 
-  # energy
 
-  daily_production:
-    name: Daily Production
+  ####### ENERGY #######
+
+  today_production:
+    name: Today Production
     address: 108
     unit: kWh
     scale: 0.1
@@ -55,9 +74,7 @@ registers:
 
   total_production:
     name: Total Production
-    address:
-      low: 96
-      high: 97
+    address: 96
     unit: kWh
     scale: 0.1
     type: U_WORD
@@ -90,7 +107,18 @@ registers:
     scale: 0.1
     type: U_WORD
 
-  # grid
+
+  ####### AUX #######
+
+  aux_power:
+    name: AUX Power
+    address: 166
+    unit: W
+    scale: 1
+    type: S_WORD
+
+
+  ####### GRID #######
 
   grid_voltage_l1:
     name: Grid Voltage L1
@@ -114,6 +142,13 @@ registers:
     scale: 10
     type: S_WORD
 
+  grid_current:
+    name: Grid Current
+    address: 160
+    unit: A
+    scale: 0.01
+    type: S_WORD
+
   grid_current_l1:
     name: Grid Current L1
     address: 164
@@ -135,7 +170,8 @@ registers:
     scale: 1
     type: S_WORD
 
-# battery
+
+  ####### BATTERY #######
 
   battery_temperature:
     name: Battery Temperature
@@ -207,8 +243,22 @@ registers:
     scale: 0.1
     type: U_WORD
 
+  battery_charge_limit_current:
+    name: Battery Charge Limit Current
+    address: 314
+    unit: A
+    scale: 1
+    type: S_WORD
 
-  # temperature
+  battery_discharge_limit_current:
+    name: Battery Discharge Limit Current
+    address: 315
+    unit: A
+    scale: 1
+    type: S_WORD
+
+
+  ####### TEMPERATURE #######
 
   dc_temperature:
     name: DC Temperature
@@ -224,3 +274,16 @@ registers:
     scale: 0.1
     offset: 1000
     type: S_WORD
+
+
+  ####### SWITCHES #######
+
+  sw_grid_charge:
+    name: Switch Grid Charge
+    address: 232
+    type: U_WORD
+
+  sw_generator_charge:
+    name: Switch Generator Charge
+    address: 231
+    type: U_WORD

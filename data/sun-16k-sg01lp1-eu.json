@@ -1,164 +1,199 @@
 {
-  "timestamp": "2026-09-10T09:01:12.982070",
+  "timestamp": "2026-09-11T12:41:56.386640",
   "host": "80.90.224.22",
   "data": {
+    "serial": {
+      "name": "Serial Number",
+      "value": "6210124195",
+      "unit": "",
+      "address": 3,
+      "type": "SERIAL"
+    },
+    "state": {
+      "name": "Overal State",
+      "value": 2,
+      "unit": "",
+      "address": 59,
+      "type": "S_WORD"
+    },
     "pv1_power": {
       "name": "PV1 Power",
       "value": 0,
       "unit": "W",
       "address": 186,
-      "type": "U_DWORD"
+      "type": "U_WORD"
     },
     "pv2_power": {
       "name": "PV2 Power",
       "value": 0,
       "unit": "W",
       "address": 187,
-      "type": "U_DWORD"
+      "type": "U_WORD"
     },
     "pv1_voltage": {
       "name": "PV1 Voltage",
       "value": 0.0,
       "unit": "V",
       "address": 109,
-      "type": "U_DWORD"
+      "type": "U_WORD"
     },
     "pv2_voltage": {
       "name": "PV2 Voltage",
       "value": 0.0,
       "unit": "V",
       "address": 111,
-      "type": "U_DWORD"
+      "type": "U_WORD"
     },
     "pv1_current": {
       "name": "PV1 Current",
       "value": 0.0,
       "unit": "A",
       "address": 110,
-      "type": "U_DWORD"
+      "type": "U_WORD"
     },
     "pv2_current": {
       "name": "PV2 Current",
-      "value": 0.1,
+      "value": 0.0,
       "unit": "A",
       "address": 112,
-      "type": "U_DWORD"
+      "type": "U_WORD"
     },
-    "daily_production": {
-      "name": "Daily Production",
+    "today_production": {
+      "name": "Today Production",
       "value": 0.0,
       "unit": "kWh",
       "address": 108,
-      "type": "U_DWORD"
+      "type": "U_WORD"
+    },
+    "total_production": {
+      "name": "Total Production",
+      "value": 0.0,
+      "unit": "kWh",
+      "address": 96,
+      "type": "U_WORD"
     },
     "today_energy_bought": {
       "name": "Today Energy Bought",
-      "value": 19.6,
+      "value": 32.8,
       "unit": "kWh",
       "address": 76,
-      "type": "U_DWORD"
+      "type": "U_WORD"
     },
     "today_energy_sold": {
       "name": "Today Energy Sold",
       "value": 0.0,
       "unit": "kWh",
       "address": 77,
-      "type": "U_DWORD"
+      "type": "U_WORD"
     },
     "total_energy_bought": {
       "name": "Total Energy Bought",
-      "value": 150.9,
+      "value": 230.8,
       "unit": "kWh",
       "address": 78,
-      "type": "U_DWORD"
+      "type": "U_WORD"
     },
     "total_energy_sold": {
       "name": "Total Energy Sold",
       "value": 0.0,
       "unit": "kWh",
       "address": 81,
-      "type": "U_DWORD"
+      "type": "U_WORD"
+    },
+    "aux_power": {
+      "name": "AUX Power",
+      "value": 1,
+      "unit": "W",
+      "address": 166,
+      "type": "S_WORD"
     },
     "grid_voltage_l1": {
       "name": "Grid Voltage L1",
-      "value": 214.3,
+      "value": 216.6,
       "unit": "V",
       "address": 150,
-      "type": "U_DWORD"
+      "type": "U_WORD"
     },
     "grid_voltage_l2": {
       "name": "Grid Voltage L2",
       "value": 0.0,
       "unit": "V",
       "address": 151,
-      "type": "U_DWORD"
+      "type": "U_WORD"
     },
     "grid_power": {
       "name": "Grid Power",
-      "value": 4080,
+      "value": 3800,
       "unit": "W",
       "address": 169,
-      "type": "U_DWORD"
+      "type": "S_WORD"
+    },
+    "grid_current": {
+      "name": "Grid Current",
+      "value": 18.6,
+      "unit": "A",
+      "address": 160,
+      "type": "S_WORD"
     },
     "grid_current_l1": {
       "name": "Grid Current L1",
       "value": 11.0,
       "unit": "A",
       "address": 164,
-      "type": "U_DWORD"
+      "type": "S_WORD"
     },
     "grid_current_l2": {
       "name": "Grid Current L2",
       "value": 0.0,
       "unit": "A",
       "address": 165,
-      "type": "U_DWORD"
+      "type": "S_WORD"
     },
     "grid_connected_status": {
       "name": "Grid Connected Status",
       "value": 1,
       "unit": null,
       "address": 194,
-      "type": "U_DWORD"
+      "type": "S_WORD"
     },
     "battery_temperature": {
       "name": "Battery Temperature",
-      "value": 25.0,
+      "value": 26.0,
       "unit": "°C",
       "address": 182,
-      "type": "U_DWORD"
+      "type": "U_WORD"
     },
     "battery_voltage": {
       "name": "Battery Voltage",
-      "value": 54.3,
+      "value": 53.4,
       "unit": "V",
       "address": 183,
-      "type": "U_DWORD"
+      "type": "U_WORD"
     },
     "battery_soc": {
       "name": "Battery SOC",
-      "value": 100,
+      "value": 99,
       "unit": "%",
       "address": 184,
-      "type": "U_DWORD"
+      "type": "U_WORD"
     },
     "battery_power": {
       "name": "Battery Power",
       "value": -64,
       "unit": "W",
       "address": 190,
-      "type": "U_DWORD"
+      "type": "S_WORD"
     },
     "battery_current": {
       "name": "Battery Current",
       "value": -0.1,
       "unit": "A",
       "address": 191,
-      "type": "U_DWORD"
+      "type": "S_WORD"
     },
     "battery_charge_total": {
       "name": "Battery Charge Total",
-      "value": 9.1,
+      "value": 11.0,
       "unit": "kWh",
       "address": {
         "low": 72,
@@ -178,34 +213,60 @@
     },
     "battery_charge_daily": {
       "name": "Battery Charge Daily",
-      "value": 0.6,
+      "value": 0.8,
       "unit": "kWh",
       "address": 70,
-      "type": "U_DWORD"
+      "type": "U_WORD"
     },
     "battery_discharge_daily": {
       "name": "Battery Discharge Daily",
       "value": 0.0,
       "unit": "kWh",
       "address": 71,
-      "type": "U_DWORD"
+      "type": "U_WORD"
+    },
+    "battery_charge_limit_current": {
+      "name": "Battery Charge Limit Current",
+      "value": 0,
+      "unit": "A",
+      "address": 314,
+      "type": "S_WORD"
+    },
+    "battery_discharge_limit_current": {
+      "name": "Battery Discharge Limit Current",
+      "value": 100,
+      "unit": "A",
+      "address": 315,
+      "type": "S_WORD"
     },
     "dc_temperature": {
       "name": "DC Temperature",
-      "value": 53.5,
+      "value": 53.0,
       "unit": "°C",
       "address": 90,
-      "type": "U_DWORD"
+      "type": "S_WORD"
     },
     "ac_temperature": {
       "name": "AC Temperature",
-      "value": 45.6,
+      "value": 46.7,
       "unit": "°C",
       "address": 91,
-      "type": "U_DWORD"
+      "type": "S_WORD"
+    },
+    "sw_grid_charge": {
+      "name": "Switch Grid Charge",
+      "value": 1,
+      "unit": "",
+      "address": 232,
+      "type": "U_WORD"
+    },
+    "sw_generator_charge": {
+      "name": "Switch Generator Charge",
+      "value": 1,
+      "unit": "",
+      "address": 231,
+      "type": "U_WORD"
     }
   },
-  "errors": [
-    "error reading total_production, address = 96-97"
-  ]
+  "errors": []
 }
