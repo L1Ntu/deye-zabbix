@@ -24,7 +24,8 @@ class DeyeReader:
 
     def _load_registers_map(self) -> None:
         try:
-            with open("maps/" + self.registers_map_path, 'r', encoding='utf-8') as f:
+            script_dir = os.path.dirname(os.path.abspath(__file__))
+            with open(script_dir + "/maps/" + self.registers_map_path, 'r', encoding='utf-8') as f:
                 config = yaml.safe_load(f)
                 self.registers = config.get('registers', {})
 
