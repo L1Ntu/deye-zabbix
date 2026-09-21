@@ -18,7 +18,14 @@ zabbix_export:
           value_type: TEXT
           description: 'Raw JSON data from Python script'
           delay: '60'
-          history: 7d
+          history: 1d
+          triggers:
+            - uuid: a1b2c3d4e5f6471489abcdef01234567
+              name: 'No data from inverter for 5 minutes'
+              expression: 'nodata(/DEYE-16K-SG01LP1-EU/deye.16k-sg01lp1,5m)=1'
+              priority: AVERAGE
+              description: 'Cannot fetch data from Deye inverter'
+              manual_close: YES
 
         # General Data
         - uuid: 7e43d4e6f8f749b1835225362987c88b
@@ -317,6 +324,26 @@ zabbix_export:
             - type: JSONPATH
               parameters:
                 - '$.data.grid_connected_status.value'
+          triggers:
+            - uuid: 568638b74afd40c08905edb6d247a26f
+              name: 'Grid disconnected'
+              expression: 'last(/DEYE-16K-SG01LP1-EU/deye.sg01lp1.grid_connected_status)=0'
+              priority: WARNING
+              description: 'Alert when grid connection is lost (0=Disconnected)'
+
+        - uuid: 09cfbc38febd41528cf744c5453e3dcc
+          name: 'Grid Current'
+          type: DEPENDENT
+          key: 'deye.sg01lp1.grid_current'
+          value_type: FLOAT
+          units: A
+          description: 'Grid Current'
+          master_item:
+            key: 'deye.16k-sg01lp1'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$.data.grid_current.value'
 
         # Battery Data
         - uuid: f446e3a1b39e49cfb3d22e5eb6c0e845
@@ -418,32 +445,88 @@ zabbix_export:
                 - '$.data.battery_discharge_total.value'
 
         - uuid: ea0b0106d7014a849077957b7dfb9bde
-          name: 'Battery Charge Daily'
+          name: 'Battery Charge Today'
           type: DEPENDENT
-          key: 'deye.sg01lp1.battery_charge_daily'
+          key: 'deye.sg01lp1.battery_charge_today'
           value_type: FLOAT
           units: kWh
-          description: 'Daily Battery Charge Energy'
+          description: 'Today Battery Charge Energy'
           master_item:
             key: 'deye.16k-sg01lp1'
           preprocessing:
             - type: JSONPATH
               parameters:
-                - '$.data.battery_charge_daily.value'
+                - '$.data.battery_charge_today.value'
 
         - uuid: c8501aef9c134bfa9b7e9309cbbeba3f
-          name: 'Battery Discharge Daily'
+          name: 'Battery Discharge Today'
           type: DEPENDENT
-          key: 'deye.sg01lp1.battery_discharge_daily'
+          key: 'deye.sg01lp1.battery_discharge_today'
           value_type: FLOAT
           units: kWh
-          description: 'Daily Battery Discharge Energy'
+          description: 'Today Battery Discharge Energy'
           master_item:
             key: 'deye.16k-sg01lp1'
           preprocessing:
             - type: JSONPATH
               parameters:
-                - '$.data.battery_discharge_daily.value'
+                - '$.data.battery_discharge_today.value'
+
+        - uuid: b4fa09dda5c249f78bf75010240385cc
+          name: 'Battery Capacity'
+          type: DEPENDENT
+          key: 'deye.sg01lp1.battery_capacity'
+          value_type: UNSIGNED
+          units: A
+          description: 'Battery Capacity'
+          master_item:
+            key: 'deye.16k-sg01lp1'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$.data.battery_capacity.value'
+
+        - uuid: 1febdd747f4f4b7baddb7facfaefbf47
+          name: 'Battery Corrected'
+          type: DEPENDENT
+          key: 'deye.sg01lp1.battery_corrected'
+          value_type: UNSIGNED
+          units: A
+          description: 'Battery Corrected'
+          master_item:
+            key: 'deye.16k-sg01lp1'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$.data.battery_corrected.value'
+
+        - uuid: bc40cb710d4f48948c4fcf0f02f9c35a
+          name: 'Battery Max Charge'
+          type: DEPENDENT
+          key: 'deye.sg01lp1.battery_max_charge'
+          value_type: UNSIGNED
+          units: A
+          description: 'Battery Max Charge'
+          master_item:
+            key: 'deye.16k-sg01lp1'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$.data.battery_max_charge.value'
+
+        - uuid: c54ca28163644d478dee1651d985ae55
+          name: 'Battery Max Discharge'
+          type: DEPENDENT
+          key: 'deye.sg01lp1.battery_max_discharge'
+          value_type: UNSIGNED
+          units: A
+          description: 'Battery Max Discharge'
+          master_item:
+            key: 'deye.16k-sg01lp1'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$.data.battery_max_discharge.value'
 
         # Temperature Data
         - uuid: fe588df1db8d457693fdd0db2464d04e

@@ -106,8 +106,13 @@ class DeyeReader:
         return value
 
     def _read_dword_register(self, low_addr: int, high_addr: int, scale: float = 1.0) -> Optional[float]:
-        low_result = self._read_register(low_addr, 1)
-        high_result = self._read_register(high_addr, 1)
+        if high_addr > low_addr and high_addr - low_addr == 1:
+            low_high_result = self._read_register(low_addr, 2)
+            low_result = [low_high_result[0]]
+            high_result = [low_high_result[1]]
+        else:
+            low_result = self._read_register(low_addr, 1)
+            high_result = self._read_register(high_addr, 1)
 
         if low_result is None or high_result is None:
             return None
