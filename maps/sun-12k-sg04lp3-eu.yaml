@@ -1,0 +1,405 @@
+registers:
+
+  ####### GENERAL #######
+
+  serial:
+    name: Serial Number
+    address: 3
+    unit: ''
+    type: SERIAL
+
+  state:
+    name: Inverter State
+    address: 500
+    unit: ''
+    scale: 1
+    type: S_WORD
+    options:
+      0: standby
+      1: selftest
+      2: normal
+      3: alarm
+      4: fault
+
+
+  ####### SOLAR #######
+
+  pv1_power:
+    name: PV1 Power
+    address: 672
+    unit: W
+    scale: 1
+    type: U_WORD
+
+  pv2_power:
+    name: PV2 Power
+    address: 673
+    unit: W
+    scale: 1
+    type: U_WORD
+
+  pv1_voltage:
+    name: PV1 Voltage
+    address: 676
+    unit: V
+    scale: 0.1
+    type: U_WORD
+
+  pv2_voltage:
+    name: PV2 Voltage
+    address: 678
+    unit: V
+    scale: 0.1
+    type: U_WORD
+
+  pv1_current:
+    name: PV1 Current
+    address: 677
+    description: Photovoltaic 1 current
+    unit: A
+    scale: 0.1
+    type: U_WORD
+
+  pv2_current:
+    name: PV2 Current
+    address: 679
+    unit: A
+    scale: 0.1
+    type: U_WORD
+
+
+  ####### ENERGY #######
+
+  today_production:
+    name: Today Production
+    address: 501
+    unit: kWh
+    scale: 0.1
+    type: U_WORD
+
+  today_energy_bought:
+    name: Today Energy Bought
+    address: 520
+    unit: kWh
+    scale: 0.1
+    type: U_WORD
+
+  today_energy_sold:
+    name: Today Energy Sold
+    address: 521
+    unit: kWh
+    scale: 0.1
+    type: U_WORD
+
+  today_energy_gen:
+    name: Today Energy Generator
+    address: 536
+    unit: kWh
+    scale: 0.1
+    type: U_WORD
+
+  today_gen_worktime:
+    name: Today Generator Work Time
+    address: 539
+    unit: hours
+    scale: 0.1
+    type: U_WORD
+
+  total_production:
+    name: Total Production
+    address:
+      low: 534
+      high: 535
+    unit: kWh
+    scale: 0.1
+    type: U_DWORD
+
+  total_energy_bought:
+    name: Total Energy Bought
+    address:
+      low: 522
+      high: 523
+    unit: kWh
+    scale: 0.1
+    type: U_DWORD
+
+  total_energy_sold:
+    name: Total Energy Sold
+    address:
+      low: 524
+      high: 525
+    unit: kWh
+    scale: 0.1
+    type: U_DWORD
+
+  total_energy_gen:
+    name: Total From Generator
+    address: 537
+    unit: kWh
+    scale: 0.1
+    type: U_WORD
+
+
+#  ####### AUX / GEN #######
+
+  gen_voltage_l1:
+    name: Generator Voltage L1
+    address: 661
+    unit: V
+    scale: 0.1
+    type: S_WORD
+
+  gen_voltage_l2:
+    name: Generator Voltage L2
+    address: 662
+    unit: V
+    scale: 0.1
+    type: S_WORD
+
+  gen_voltage_l3:
+    name: Generator Voltage L3
+    address: 663
+    unit: V
+    scale: 0.1
+    type: S_WORD
+
+  gen_power_total:
+    name: Generator Total Power
+    address: 667
+    unit: W
+    scale: 1
+    type: S_WORD
+
+
+  ####### GRID #######
+
+  grid_voltage_l1:
+    name: Grid Voltage L1
+    address: 627
+    unit: V
+    scale: 0.1
+    type: U_WORD
+
+  grid_voltage_l2:
+    name: Grid Voltage L2
+    address: 628
+    unit: V
+    scale: 0.1
+    type: U_WORD
+
+  grid_voltage_l3:
+    name: Grid Voltage L3
+    address: 629
+    unit: V
+    scale: 0.1
+    type: U_WORD
+
+  grid_power_l1:
+    name: Grid Power L1
+    address: 650
+    description: "- export, + import"
+    unit: W
+    scale: 1
+    type: S_WORD
+
+  grid_power_l2:
+    name: Grid Power L2
+    address: 651
+    description: "- export, + import"
+    unit: W
+    scale: 1
+    type: S_WORD
+
+  grid_power_l3:
+    name: Grid Power L3
+    address: 652
+    description: "- export, + import"
+    unit: W
+    scale: 1
+    type: S_WORD
+
+  grid_power:
+    name: Grid Power Total
+    address: 625
+    unit: A
+    scale: 1
+    type: S_WORD
+
+
+  ####### UPS LOAD / HOME LOAD #######
+
+  ups_power_l1:
+    name: UPS Power L1
+    address: 640
+    unit: W
+    scale: 1
+    type: S_WORD
+
+  ups_power_l2:
+    name: UPS Power L2
+    address: 641
+    unit: W
+    scale: 1
+    type: S_WORD
+
+  ups_power_l3:
+    name: Inverter Power L3
+    address: 642
+    unit: W
+    scale: 1
+    type: S_WORD
+
+  ups_power_total:
+    name: Inverter Power Total
+    address: 643
+    unit: W
+    scale: 1
+    type: S_WORD
+
+  home_power_l1:
+    name: Home Power L1
+    address: 650
+    unit: W
+    scale: 1
+    type: S_WORD
+
+  home_power_l2:
+    name: Home Power L2
+    address: 651
+    unit: W
+    scale: 1
+    type: S_WORD
+
+  home_power_l3:
+    name: Home Power L3
+    address: 652
+    unit: W
+    scale: 1
+    type: S_WORD
+
+  home_power_total:
+    name: Home Power Total
+    address: 653
+    unit: W
+    scale: 1
+    type: S_WORD
+
+
+  ####### BATTERY #######
+
+  battery_temperature:
+    name: Battery Temperature
+    address: 586
+    unit: °C
+    scale: 0.1
+    offset: 1000
+    type: U_WORD
+
+  battery_voltage:
+    name: "Battery Voltage"
+    address: 587
+    unit: V
+    scale: 0.01
+    type: U_WORD
+
+  battery_soc:
+    name: Battery SOC
+    address: 588
+    unit: "%"
+    scale: 1
+    type: U_WORD
+
+  battery_power:
+    name: Battery Power
+    note: "- charge ; + discharge"
+    address: 590
+    unit: W
+    scale: 1
+    type: S_WORD
+
+  battery_current:
+    name: Battery Current
+    note: "- charge ; + discharge"
+    address: 591
+    unit: A
+    scale: 0.01
+    type: S_WORD
+
+  battery_charge_total:
+    name: Battery Charge Total
+    address:
+      low: 516
+      high: 517
+    unit: kWh
+    scale: 0.1
+    type: U_DWORD
+
+  battery_discharge_total:
+    name: Battery Discharge Total
+    address:
+      low: 518
+      high: 519
+    unit: kWh
+    scale: 0.1
+    type: U_DWORD
+
+  battery_charge_daily:
+    name: Battery Charge Daily
+    address: 514
+    unit: kWh
+    scale: 0.1
+    type: U_WORD
+
+  battery_discharge_daily:
+    name: Battery Discharge Daily
+    address: 515
+    unit: kWh
+    scale: 0.1
+    type: U_WORD
+
+  battery_capacity:
+    name: Battery Capacity
+    address: 102
+    unit: A
+    scale: 1
+    type: U_WORD
+
+  battery_corrected:
+    name: Battery Corrected
+    address: 592
+    unit: A
+    scale: 1
+    type: U_WORD
+
+  battery_max_charge:
+    name: Battery Max Charge
+    address: 108
+    unit: A
+    scale: 1
+    type: U_WORD
+
+  battery_max_discharge:
+    name: Battery Max Discharge
+    address: 109
+    unit: 'A'
+    scale: 1
+    type: U_WORD
+
+
+  ###### TEMPERATURE #######
+
+  dc_temperature:
+    name: DC Temperature
+    address: 540
+    unit: °C
+    scale: 0.1
+    offset: 1000
+    type: S_WORD
+
+  ac_temperature:
+    name: AC Temperature
+    address: 541
+    unit: °C
+    scale: 0.1
+    offset: 1000
+    type: S_WORD

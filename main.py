@@ -178,7 +178,7 @@ class DeyeReader:
                     'type': address_type
                 }
             else:
-                results['errors'].append(f"error reading {reg_key}, address = {low_addr}-{high_addr}")
+                results['errors'].append(f"error reading {reg_key}, address = {address}, low={low_addr} high={high_addr}")
 
             time.sleep(0.05)
 

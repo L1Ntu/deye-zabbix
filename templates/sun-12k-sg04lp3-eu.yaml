@@ -1,0 +1,769 @@
+zabbix_export:
+  version: '7.0'
+  template_groups:
+    - uuid: 3bac9014f51d4383a238feffbac3112e
+      name: Templates
+  templates:
+    - uuid: 6565c7059896404b857eb903d42499de
+      template: DEYE-12K-SG04LP3-EU
+      name: Deye 12K-SG04LP3-EU Inverter
+      description: 'Template for monitoring Deye hybrid inverter 12K-SG04LP3-EU'
+      groups:
+        - name: Templates
+      items:
+        # Raw data collection
+        - uuid: 5591703bb6764107893fb9e5040425d1
+          name: 'Raw Data'
+          key: 'deye.12k-sg04lp3'
+          value_type: TEXT
+          description: 'Raw JSON data from Python script'
+          delay: '60'
+          history: 1d
+          triggers:
+            - uuid: e7535d2a504848bab06781ab4ea134ba
+              name: 'No data from inverter for 5 minutes'
+              expression: 'nodata(/DEYE-12K-SG04LP3-EU/deye.12k-sg04lp3,5m)=1'
+              priority: AVERAGE
+              description: 'Cannot fetch data from Deye inverter'
+              manual_close: YES
+
+        # General Data
+        - uuid: f4eedd34861d42e8a894f954a67d719b
+          name: 'Serial Number'
+          type: DEPENDENT
+          key: 'deye.sg04lp3.serial'
+          value_type: TEXT
+          description: 'Device Serial Number'
+          master_item:
+            key: 'deye.12k-sg04lp3'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$.data.serial.value'
+
+        - uuid: 36b99ca22245487091b977aa0c7ab1ee
+          name: 'Overall State'
+          type: DEPENDENT
+          key: 'deye.sg04lp3.state'
+          value_type: UNSIGNED
+          description: 'Device State (0=standby, 1=selftest, 2=normal, 3=alarm, 4=fault)'
+          valuemap:
+            name: 'Deye State'
+          master_item:
+            key: 'deye.12k-sg04lp3'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$.data.state.value'
+
+        # PV Data
+        - uuid: 11de15b157ff44e6abecf2a3afb95030
+          name: 'PV1 Power'
+          type: DEPENDENT
+          key: 'deye.sg04lp3.pv1_power'
+          value_type: UNSIGNED
+          units: W
+          description: 'PV1 Power Output'
+          master_item:
+            key: 'deye.12k-sg04lp3'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$.data.pv1_power.value'
+
+        - uuid: 175395b56092414996d27e6f0fec619e
+          name: 'PV2 Power'
+          type: DEPENDENT
+          key: 'deye.sg04lp3.pv2_power'
+          value_type: UNSIGNED
+          units: W
+          description: 'PV2 Power Output'
+          master_item:
+            key: 'deye.12k-sg04lp3'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$.data.pv2_power.value'
+
+        - uuid: c357a2f0d07a40629f69d716b51d8b2a
+          name: 'PV1 Voltage'
+          type: DEPENDENT
+          key: 'deye.sg04lp3.pv1_voltage'
+          value_type: FLOAT
+          units: V
+          description: 'PV1 Voltage'
+          master_item:
+            key: 'deye.12k-sg04lp3'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$.data.pv1_voltage.value'
+
+        - uuid: a97a8cc923fe4004ba6c6cff8a85fbad
+          name: 'PV2 Voltage'
+          type: DEPENDENT
+          key: 'deye.sg04lp3.pv2_voltage'
+          value_type: FLOAT
+          units: V
+          description: 'PV2 Voltage'
+          master_item:
+            key: 'deye.12k-sg04lp3'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$.data.pv2_voltage.value'
+
+        - uuid: 584ee7bb395541e99ed4c6d475507a30
+          name: 'PV1 Current'
+          type: DEPENDENT
+          key: 'deye.sg04lp3.pv1_current'
+          value_type: FLOAT
+          units: A
+          description: 'PV1 Current'
+          master_item:
+            key: 'deye.12k-sg04lp3'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$.data.pv1_current.value'
+
+        - uuid: 4fcb65b7a59846a48974f436906136fd
+          name: 'PV2 Current'
+          type: DEPENDENT
+          key: 'deye.sg04lp3.pv2_current'
+          value_type: FLOAT
+          units: A
+          description: 'PV2 Current'
+          master_item:
+            key: 'deye.12k-sg04lp3'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$.data.pv2_current.value'
+
+        # Energy Data
+        - uuid: 9c72e9aaa07f479e94c045f1c3390cd5
+          name: 'Today Production'
+          type: DEPENDENT
+          key: 'deye.sg04lp3.today_production'
+          value_type: FLOAT
+          units: kWh
+          description: 'Today Energy Production'
+          master_item:
+            key: 'deye.12k-sg04lp3'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$.data.today_production.value'
+
+        - uuid: 085c3543302245518506e04ad6eb022a
+          name: 'Total Production'
+          type: DEPENDENT
+          key: 'deye.sg04lp3.total_production'
+          value_type: FLOAT
+          units: kWh
+          description: 'Total Energy Production'
+          master_item:
+            key: 'deye.12k-sg04lp3'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$.data.total_production.value'
+
+        - uuid: 2ceb30fbce994f57b59997ec4854c14e
+          name: 'Today Energy Bought'
+          type: DEPENDENT
+          key: 'deye.sg04lp3.today_energy_bought'
+          value_type: FLOAT
+          units: kWh
+          description: 'Today Energy Bought from Grid'
+          master_item:
+            key: 'deye.12k-sg04lp3'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$.data.today_energy_bought.value'
+
+        - uuid: af0318a27ce94da384b2eae806a4105e
+          name: 'Today Energy Sold'
+          type: DEPENDENT
+          key: 'deye.sg04lp3.today_energy_sold'
+          value_type: FLOAT
+          units: kWh
+          description: 'Today Energy Sold to Grid'
+          master_item:
+            key: 'deye.12k-sg04lp3'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$.data.today_energy_sold.value'
+
+        - uuid: fc335b0ec9f7439ba2db97e848bcc148
+          name: 'Today Energy Generator'
+          type: DEPENDENT
+          key: 'deye.sg04lp3.today_energy_gen'
+          value_type: FLOAT
+          units: kWh
+          description: 'Today Energy from Generator'
+          master_item:
+            key: 'deye.12k-sg04lp3'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$.data.today_energy_gen.value'
+
+        - uuid: 347bac6dcf164375ba4489a6cf2326a2
+          name: 'Today Generator Work Time'
+          type: DEPENDENT
+          key: 'deye.sg04lp3.today_gen_worktime'
+          value_type: FLOAT
+          units: hours
+          description: 'Today Generator Work Time'
+          master_item:
+            key: 'deye.12k-sg04lp3'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$.data.today_gen_worktime.value'
+
+        - uuid: 3e83c24985134507a665038755429007
+          name: 'Total Energy Bought'
+          type: DEPENDENT
+          key: 'deye.sg04lp3.total_energy_bought'
+          value_type: FLOAT
+          units: kWh
+          description: 'Total Energy Bought from Grid'
+          master_item:
+            key: 'deye.12k-sg04lp3'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$.data.total_energy_bought.value'
+
+        - uuid: 0cc91db4edfd4dc9a7c5c51c1f608cbc
+          name: 'Total Energy Sold'
+          type: DEPENDENT
+          key: 'deye.sg04lp3.total_energy_sold'
+          value_type: FLOAT
+          units: kWh
+          description: 'Total Energy Sold to Grid'
+          master_item:
+            key: 'deye.12k-sg04lp3'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$.data.total_energy_sold.value'
+
+        - uuid: 73f38bf3527c4b57b1b97a91b7fd0501
+          name: 'Total Energy Generator'
+          type: DEPENDENT
+          key: 'deye.sg04lp3.total_energy_gen'
+          value_type: FLOAT
+          units: kWh
+          description: 'Total Energy from Generator'
+          master_item:
+            key: 'deye.12k-sg04lp3'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$.data.total_energy_gen.value'
+
+        # Generator Data
+        - uuid: c86674321aa5453ebeae6842890ad59f
+          name: 'Generator Voltage L1'
+          type: DEPENDENT
+          key: 'deye.sg04lp3.gen_voltage_l1'
+          value_type: FLOAT
+          units: V
+          description: 'Generator Voltage Phase 1'
+          master_item:
+            key: 'deye.12k-sg04lp3'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$.data.gen_voltage_l1.value'
+
+        - uuid: e6066bbfba284efdb62c8dfeb0f40e62
+          name: 'Generator Voltage L2'
+          type: DEPENDENT
+          key: 'deye.sg04lp3.gen_voltage_l2'
+          value_type: FLOAT
+          units: V
+          description: 'Generator Voltage Phase 2'
+          master_item:
+            key: 'deye.12k-sg04lp3'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$.data.gen_voltage_l2.value'
+
+        - uuid: 88d3b5aa5c9b4f37afd9e1e88ba9ae1a
+          name: 'Generator Voltage L3'
+          type: DEPENDENT
+          key: 'deye.sg04lp3.gen_voltage_l3'
+          value_type: FLOAT
+          units: V
+          description: 'Generator Voltage Phase 3'
+          master_item:
+            key: 'deye.12k-sg04lp3'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$.data.gen_voltage_l3.value'
+
+        - uuid: 755d0f12eb1e42b5a42c278f3e2fee1d
+          name: 'Generator Total Power'
+          type: DEPENDENT
+          key: 'deye.sg04lp3.gen_power_total'
+          value_type: FLOAT
+          units: W
+          description: 'Generator Total Power'
+          master_item:
+            key: 'deye.12k-sg04lp3'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$.data.gen_power_total.value'
+
+        # Grid Data
+        - uuid: 33918518a1e8429182b0d47c60e25208
+          name: 'Grid Voltage L1'
+          type: DEPENDENT
+          key: 'deye.sg04lp3.grid_voltage_l1'
+          value_type: FLOAT
+          units: V
+          description: 'Grid Voltage Phase 1'
+          master_item:
+            key: 'deye.12k-sg04lp3'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$.data.grid_voltage_l1.value'
+
+        - uuid: 52df21f30ed2402d92ff698fac6fda55
+          name: 'Grid Voltage L2'
+          type: DEPENDENT
+          key: 'deye.sg04lp3.grid_voltage_l2'
+          value_type: FLOAT
+          units: V
+          description: 'Grid Voltage Phase 2'
+          master_item:
+            key: 'deye.12k-sg04lp3'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$.data.grid_voltage_l2.value'
+
+        - uuid: 3ebd8f25a21640fcb2eba668a1c387d5
+          name: 'Grid Voltage L3'
+          type: DEPENDENT
+          key: 'deye.sg04lp3.grid_voltage_l3'
+          value_type: FLOAT
+          units: V
+          description: 'Grid Voltage Phase 3'
+          master_item:
+            key: 'deye.12k-sg04lp3'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$.data.grid_voltage_l3.value'
+
+        - uuid: 47e48b34f40e4694987cf96882809526
+          name: 'Grid Power L1'
+          type: DEPENDENT
+          key: 'deye.sg04lp3.grid_power_l1'
+          value_type: FLOAT
+          units: W
+          description: 'Grid Power Phase 1 (negative=export, positive=import)'
+          master_item:
+            key: 'deye.12k-sg04lp3'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$.data.grid_power_l1.value'
+
+        - uuid: 6796acc6887b4c71a104636b8eb39b93
+          name: 'Grid Power L2'
+          type: DEPENDENT
+          key: 'deye.sg04lp3.grid_power_l2'
+          value_type: FLOAT
+          units: W
+          description: 'Grid Power Phase 2 (negative=export, positive=import)'
+          master_item:
+            key: 'deye.12k-sg04lp3'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$.data.grid_power_l2.value'
+
+        - uuid: d823bde547f141e0a76cc130dced83f0
+          name: 'Grid Power L3'
+          type: DEPENDENT
+          key: 'deye.sg04lp3.grid_power_l3'
+          value_type: FLOAT
+          units: W
+          description: 'Grid Power Phase 3 (negative=export, positive=import)'
+          master_item:
+            key: 'deye.12k-sg04lp3'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$.data.grid_power_l3.value'
+
+        - uuid: 51da2e1feaaa45ac847b4c72d17145d0
+          name: 'Grid Power Total'
+          type: DEPENDENT
+          key: 'deye.sg04lp3.grid_power'
+          value_type: FLOAT
+          units: A
+          description: 'Grid Power Exchange Total'
+          master_item:
+            key: 'deye.12k-sg04lp3'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$.data.grid_power.value'
+
+        # UPS Load Data
+        - uuid: b0d3ec10206643f7b245d213d6c42553
+          name: 'UPS Power L1'
+          type: DEPENDENT
+          key: 'deye.sg04lp3.ups_power_l1'
+          value_type: FLOAT
+          units: W
+          description: 'UPS Power Phase 1'
+          master_item:
+            key: 'deye.12k-sg04lp3'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$.data.ups_power_l1.value'
+
+        - uuid: 006412b6720e4cdba063448717e75e99
+          name: 'UPS Power L2'
+          type: DEPENDENT
+          key: 'deye.sg04lp3.ups_power_l2'
+          value_type: FLOAT
+          units: W
+          description: 'UPS Power Phase 2'
+          master_item:
+            key: 'deye.12k-sg04lp3'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$.data.ups_power_l2.value'
+
+        - uuid: 86b309c016a9481880e905a1fc18de99
+          name: 'UPS Power L3'
+          type: DEPENDENT
+          key: 'deye.sg04lp3.ups_power_l3'
+          value_type: FLOAT
+          units: W
+          description: 'UPS Power Phase 3'
+          master_item:
+            key: 'deye.12k-sg04lp3'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$.data.ups_power_l3.value'
+
+        - uuid: 6f63e983a64442faab38a6ed7f5857df
+          name: 'UPS Power Total'
+          type: DEPENDENT
+          key: 'deye.sg04lp3.ups_power_total'
+          value_type: FLOAT
+          units: W
+          description: 'UPS Power Total'
+          master_item:
+            key: 'deye.12k-sg04lp3'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$.data.ups_power_total.value'
+
+        # Home Load Data
+        - uuid: 1869c449bffb473c877d8dcf02b1dc41
+          name: 'Home Power L1'
+          type: DEPENDENT
+          key: 'deye.sg04lp3.home_power_l1'
+          value_type: FLOAT
+          units: W
+          description: 'Home Power Phase 1'
+          master_item:
+            key: 'deye.12k-sg04lp3'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$.data.home_power_l1.value'
+
+        - uuid: 98619168540a42b9a18b667cb337bb7f
+          name: 'Home Power L2'
+          type: DEPENDENT
+          key: 'deye.sg04lp3.home_power_l2'
+          value_type: FLOAT
+          units: W
+          description: 'Home Power Phase 2'
+          master_item:
+            key: 'deye.12k-sg04lp3'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$.data.home_power_l2.value'
+
+        - uuid: b514ac72cab1488b93274e0175f68a6c
+          name: 'Home Power L3'
+          type: DEPENDENT
+          key: 'deye.sg04lp3.home_power_l3'
+          value_type: FLOAT
+          units: W
+          description: 'Home Power Phase 3'
+          master_item:
+            key: 'deye.12k-sg04lp3'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$.data.home_power_l3.value'
+
+        - uuid: 36872aa3753e4aecaeb94bb326f0503a
+          name: 'Home Power Total'
+          type: DEPENDENT
+          key: 'deye.sg04lp3.home_power_total'
+          value_type: FLOAT
+          units: W
+          description: 'Home Power Total'
+          master_item:
+            key: 'deye.12k-sg04lp3'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$.data.home_power_total.value'
+
+        # Battery Data
+        - uuid: 9ffd0cb9932c448da78d8948f560c2f9
+          name: 'Battery Temperature'
+          type: DEPENDENT
+          key: 'deye.sg04lp3.battery_temperature'
+          value_type: FLOAT
+          units: °C
+          description: 'Battery Temperature'
+          master_item:
+            key: 'deye.12k-sg04lp3'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$.data.battery_temperature.value'
+
+        - uuid: 7e050c2727e7446dbd9b892a14ca03e7
+          name: 'Battery Voltage'
+          type: DEPENDENT
+          key: 'deye.sg04lp3.battery_voltage'
+          value_type: FLOAT
+          units: V
+          description: 'Battery Voltage'
+          master_item:
+            key: 'deye.12k-sg04lp3'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$.data.battery_voltage.value'
+
+        - uuid: 37d42939a60049e7a7d3994eb947e7f7
+          name: 'Battery SOC'
+          type: DEPENDENT
+          key: 'deye.sg04lp3.battery_soc'
+          value_type: UNSIGNED
+          units: '%'
+          description: 'Battery State of Charge'
+          master_item:
+            key: 'deye.12k-sg04lp3'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$.data.battery_soc.value'
+
+        - uuid: 4cc0d5b97caf47b1b427aebe2cbbbbb5
+          name: 'Battery Power'
+          type: DEPENDENT
+          key: 'deye.sg04lp3.battery_power'
+          value_type: FLOAT
+          units: W
+          description: 'Battery Power (negative=charging, positive=discharging)'
+          master_item:
+            key: 'deye.12k-sg04lp3'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$.data.battery_power.value'
+
+        - uuid: 67c5cd2d0ed34a949cba8b2d2eaa1247
+          name: 'Battery Current'
+          type: DEPENDENT
+          key: 'deye.sg04lp3.battery_current'
+          value_type: FLOAT
+          units: A
+          description: 'Battery Current (negative=charging, positive=discharging)'
+          master_item:
+            key: 'deye.12k-sg04lp3'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$.data.battery_current.value'
+
+        - uuid: 0fdd3e4c62904b31943bd5c6716971c4
+          name: 'Battery Charge Total'
+          type: DEPENDENT
+          key: 'deye.sg04lp3.battery_charge_total'
+          value_type: FLOAT
+          units: kWh
+          description: 'Total Battery Charge Energy'
+          master_item:
+            key: 'deye.12k-sg04lp3'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$.data.battery_charge_total.value'
+
+        - uuid: 4b6bb74851ed451ab3340c610fd83d6c
+          name: 'Battery Discharge Total'
+          type: DEPENDENT
+          key: 'deye.sg04lp3.battery_discharge_total'
+          value_type: FLOAT
+          units: kWh
+          description: 'Total Battery Discharge Energy'
+          master_item:
+            key: 'deye.12k-sg04lp3'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$.data.battery_discharge_total.value'
+
+        - uuid: ea358b908e964c4387e26cd9393fa370
+          name: 'Battery Charge Daily'
+          type: DEPENDENT
+          key: 'deye.sg04lp3.battery_charge_daily'
+          value_type: FLOAT
+          units: kWh
+          description: 'Today Battery Charge Energy'
+          master_item:
+            key: 'deye.12k-sg04lp3'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$.data.battery_charge_daily.value'
+
+        - uuid: 65074035c4b3450dada01d39ac7bfbb1
+          name: 'Battery Discharge Daily'
+          type: DEPENDENT
+          key: 'deye.sg04lp3.battery_discharge_daily'
+          value_type: FLOAT
+          units: kWh
+          description: 'Today Battery Discharge Energy'
+          master_item:
+            key: 'deye.12k-sg04lp3'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$.data.battery_discharge_daily.value'
+
+        - uuid: fccbd19c82bd433887acd32a1432d6ba
+          name: 'Battery Capacity'
+          type: DEPENDENT
+          key: 'deye.sg04lp3.battery_capacity'
+          value_type: UNSIGNED
+          units: A
+          description: 'Battery Capacity'
+          master_item:
+            key: 'deye.12k-sg04lp3'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$.data.battery_capacity.value'
+
+        - uuid: f20f015e1c14447bab61b01abffa5b95
+          name: 'Battery Corrected'
+          type: DEPENDENT
+          key: 'deye.sg04lp3.battery_corrected'
+          value_type: UNSIGNED
+          units: A
+          description: 'Battery Corrected'
+          master_item:
+            key: 'deye.12k-sg04lp3'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$.data.battery_corrected.value'
+
+        - uuid: 9b1b41e82bff4a3f919bf86e2d335a56
+          name: 'Battery Max Charge'
+          type: DEPENDENT
+          key: 'deye.sg04lp3.battery_max_charge'
+          value_type: UNSIGNED
+          units: A
+          description: 'Battery Max Charge'
+          master_item:
+            key: 'deye.12k-sg04lp3'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$.data.battery_max_charge.value'
+
+        - uuid: fef59582484a49a2846bb14e0645d5d7
+          name: 'Battery Max Discharge'
+          type: DEPENDENT
+          key: 'deye.sg04lp3.battery_max_discharge'
+          value_type: UNSIGNED
+          units: A
+          description: 'Battery Max Discharge'
+          master_item:
+            key: 'deye.12k-sg04lp3'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$.data.battery_max_discharge.value'
+
+        # Temperature Data
+        - uuid: 366bd7e0663a4aba844508a6acfd0a11
+          name: 'DC Temperature'
+          type: DEPENDENT
+          key: 'deye.sg04lp3.dc_temperature'
+          value_type: FLOAT
+          units: °C
+          description: 'DC Side Temperature'
+          master_item:
+            key: 'deye.12k-sg04lp3'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$.data.dc_temperature.value'
+
+        - uuid: aaeb757db5924a75af40845d943b76a5
+          name: 'AC Temperature'
+          type: DEPENDENT
+          key: 'deye.sg04lp3.ac_temperature'
+          value_type: FLOAT
+          units: °C
+          description: 'AC Side Temperature'
+          master_item:
+            key: 'deye.12k-sg04lp3'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$.data.ac_temperature.value'
+
+      valuemaps:
+        -
+          uuid: 1b2ffd65761541e893a9830f6cceb20c
+          name: 'Deye State'
+          mappings:
+            - value: '0'
+              newvalue: Standby
+            - value: '1'
+              newvalue: Selftest
+            - value: '2'
+              newvalue: Normal
+            - value: '3'
+              newvalue: Alarm
+            - value: '4'
+              newvalue: Fault
+            - value: ''
+              newvalue: Unknown
