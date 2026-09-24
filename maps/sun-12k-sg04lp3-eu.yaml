@@ -3,8 +3,9 @@ registers:
   ####### GENERAL #######
 
   serial:
-    name: Serial Number
-    address: 3
+    name: Inverter Serial
+    address:
+      list: [3, 4, 5, 6, 7]
     unit: ''
     type: SERIAL
 
@@ -175,28 +176,28 @@ registers:
 
   grid_voltage_l1:
     name: Grid Voltage L1
-    address: 627
+    address: 598
     unit: V
     scale: 0.1
     type: U_WORD
 
   grid_voltage_l2:
     name: Grid Voltage L2
-    address: 628
+    address: 599
     unit: V
     scale: 0.1
     type: U_WORD
 
   grid_voltage_l3:
     name: Grid Voltage L3
-    address: 629
+    address: 600
     unit: V
     scale: 0.1
     type: U_WORD
 
   grid_power_l1:
     name: Grid Power L1
-    address: 650
+    address: 616
     description: "- export, + import"
     unit: W
     scale: 1
@@ -204,7 +205,7 @@ registers:
 
   grid_power_l2:
     name: Grid Power L2
-    address: 651
+    address: 617
     description: "- export, + import"
     unit: W
     scale: 1
@@ -212,7 +213,7 @@ registers:
 
   grid_power_l3:
     name: Grid Power L3
-    address: 652
+    address: 618
     description: "- export, + import"
     unit: W
     scale: 1
@@ -220,8 +221,8 @@ registers:
 
   grid_power:
     name: Grid Power Total
-    address: 625
-    unit: A
+    address: 619
+    unit: W
     scale: 1
     type: S_WORD
 

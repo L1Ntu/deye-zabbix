@@ -21,7 +21,10 @@ class DeyeReader:
         self.registers_map_path = registers_map_path
         self.client: Optional[PySolarmanV5] = None
         self.registers: Dict[str, Dict[str, Any]] = {}
+        self.registers_groups: list[Dict] = []
+        self.registers_values: Dict[str, int] = {}
         self._load_registers_map()
+        self._group_registers()
 
     def _load_registers_map(self) -> None:
         try:
@@ -33,10 +36,50 @@ class DeyeReader:
             if not self.registers:
                 raise ValueError("No registers found in map file")
         except FileNotFoundError:
-            print(f"file not found: {self.registers_map_path}")
-            exit(1)
+            exit(f"file not found: {self.registers_map_path}")
         except yaml.YAMLError as e:
             raise ValueError(f"Error parsing YAML file: {e}")
+
+    def _group_registers(self) -> None:
+        max_span = 8
+        max_registers = 8
+        ids = []
+
+        for config in self.registers.values():
+            if type(config['address']) == int:
+                ids.append(int(config['address']))
+            if config['type'] == 'SERIAL':
+                for reg in config['address']['list']:
+                    ids.append(reg)
+            if config['type'] == 'U_DWORD':
+                ids.append(config['address']['low'])
+                ids.append(config['address']['high'])
+
+        groups = []
+        current = []
+
+        for reg in sorted(ids):
+            if current:
+                fits_span = reg - current[0] <= max_span
+                fits_count = len(current) < max_registers
+                if fits_span and fits_count:
+                    current.append(reg)
+                    continue
+
+            if current:
+                groups.append(current)
+            current = [reg]
+
+        if current:
+            groups.append(current)
+
+        for g in groups:
+            self.registers_groups.append({
+                "start": g[0],
+                "count": len(g),
+                "length": g[-1] - g[0] + 1,
+                "registers": g
+            })
 
     def connect(self) -> bool:
         try:
@@ -45,7 +88,9 @@ class DeyeReader:
                 serial=self.serial,
                 port=self.port,
                 mb_slave_id=1,
-                verbose=False
+                verbose=False,
+                socket_timeout=5,
+                auto_reconnect=True
             )
 
             return True
@@ -67,8 +112,18 @@ class DeyeReader:
         return value
 
     def _read_register(self, address: int, quantity: int = 1) -> Optional[List[int]]:
+        """
+        reads single or pack of registers
+        :param address:
+        :param quantity:
+        :return:
+        """
         if not self.client:
             return None
+
+        if quantity == 1:
+            if self.registers_values.get(address) is not None:
+                return [self.registers_values.get(address)]
 
         try:
             result = self.client.read_holding_registers(
@@ -79,7 +134,32 @@ class DeyeReader:
         except (IllegalDataAddressError, Exception) as e:
             return None
 
+    def _read_register_groups(self) -> None:
+        """
+        reads pack of registers, to avoid deye hangs
+        :return:
+        """
+        for group in self.registers_groups:
+            try:
+                result = self.client.read_holding_registers(
+                    register_addr=group['start'],
+                    quantity=group['length'],
+
+                )
+                for idx, r in enumerate(result):
+                    address = int(group['start'] + idx)
+                    self.registers_values[address] = r
+                time.sleep(0.05)
+            except (IllegalDataAddressError, Exception) as e:
+                print(f"error reading register group: {e}")
+                continue
+
     def _read_single_register(self, reg_config: Dict[str, Any]) -> Optional[float]:
+        """
+        read single register
+        :param reg_config:
+        :return:
+        """
         address = reg_config['address']
         scale = reg_config.get('scale', 1)
         offset = reg_config.get('offset', 0)
@@ -106,13 +186,15 @@ class DeyeReader:
         return value
 
     def _read_dword_register(self, low_addr: int, high_addr: int, scale: float = 1.0) -> Optional[float]:
-        if high_addr > low_addr and high_addr - low_addr == 1:
-            low_high_result = self._read_register(low_addr, 2)
-            low_result = [low_high_result[0]]
-            high_result = [low_high_result[1]]
-        else:
-            low_result = self._read_register(low_addr, 1)
-            high_result = self._read_register(high_addr, 1)
+        """
+        reads dword register, 2 registers high/low value
+        :param low_addr:
+        :param high_addr:
+        :param scale:
+        :return:
+        """
+        low_result = self._read_register(low_addr, 1)
+        high_result = self._read_register(high_addr, 1)
 
         if low_result is None or high_result is None:
             return None
@@ -126,8 +208,20 @@ class DeyeReader:
 
         return round(float(value * scale), 1)
 
-    def _read_serial_register(self, address: int) -> Optional[str]:
-        data = self._read_register(address, 5)
+    def _read_serial_register(self, addresses: list) -> Optional[str]:
+        """
+        reads serial registers and transfer data to ascii
+        :param addresses:
+        :return:
+        """
+        data = []
+        for address in addresses:
+            d = self._read_register(address, 1)
+            if d is None:
+                return None
+            else:
+                data.append(d[0])
+
         sn_bytes = bytearray()
         for reg in data:
             low_byte = reg & 0xFF
@@ -150,6 +244,8 @@ class DeyeReader:
             'errors': []
         }
 
+        self._read_register_groups()
+
         for reg_key, reg_config in self.registers.items():
             address = reg_config['address']
             address_type = reg_config.get('type', '')
@@ -159,7 +255,7 @@ class DeyeReader:
             high_addr = reg_config.get('address').get('high', 0) if type(address) is dict else 0
 
             if address_type == 'SERIAL':
-                value = self._read_serial_register(address)
+                value = self._read_serial_register(address['list'])
             elif address_type == 'U_DWORD':
                 value = self._read_dword_register(low_addr, high_addr, reg_config['scale'])
             elif address_type == 'U_WORD':
@@ -178,9 +274,9 @@ class DeyeReader:
                     'type': address_type
                 }
             else:
-                results['errors'].append(f"error reading {reg_key}, address = {address}, low={low_addr} high={high_addr}")
-
-            time.sleep(0.05)
+                results['errors'].append(
+                    f"error reading {reg_key}, address = {address}, low={low_addr} high={high_addr}"
+                )
 
         return results
 

@@ -18,6 +18,7 @@ zabbix_export:
           value_type: TEXT
           description: 'Raw JSON data from Python script'
           delay: '60'
+          timeout: 30s
           history: 1d
           triggers:
             - uuid: e7535d2a504848bab06781ab4ea134ba

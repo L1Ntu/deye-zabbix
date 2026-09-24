@@ -1,12 +1,20 @@
 {
-  "timestamp": "2026-09-22T13:41:52.301676",
-  "host": "80.90.224.138",
+  "timestamp": "2026-09-24T18:03:29.539544",
+  "host": "deye.local",
   "data": {
     "serial": {
-      "name": "Serial Number",
+      "name": "Inverter Serial",
       "value": "4210916062",
       "unit": "",
-      "address": 3,
+      "address": {
+        "list": [
+          3,
+          4,
+          5,
+          6,
+          7
+        ]
+      },
       "type": "SERIAL"
     },
     "state": {
@@ -32,14 +40,14 @@
     },
     "pv1_voltage": {
       "name": "PV1 Voltage",
-      "value": 12.0,
+      "value": 12.2,
       "unit": "V",
       "address": 676,
       "type": "U_WORD"
     },
     "pv2_voltage": {
       "name": "PV2 Voltage",
-      "value": 2.1,
+      "value": 3.4,
       "unit": "V",
       "address": 678,
       "type": "U_WORD"
@@ -67,7 +75,7 @@
     },
     "today_energy_bought": {
       "name": "Today Energy Bought",
-      "value": 32.2,
+      "value": 41.4,
       "unit": "kWh",
       "address": 520,
       "type": "U_WORD"
@@ -105,7 +113,7 @@
     },
     "total_energy_bought": {
       "name": "Total Energy Bought",
-      "value": 32633.2,
+      "value": 32752.6,
       "unit": "kWh",
       "address": {
         "low": 522,
@@ -132,14 +140,14 @@
     },
     "gen_voltage_l1": {
       "name": "Generator Voltage L1",
-      "value": 1.0,
+      "value": 1.2,
       "unit": "V",
       "address": 661,
       "type": "S_WORD"
     },
     "gen_voltage_l2": {
       "name": "Generator Voltage L2",
-      "value": 2.8,
+      "value": 2.9,
       "unit": "V",
       "address": 662,
       "type": "S_WORD"
@@ -160,112 +168,112 @@
     },
     "grid_voltage_l1": {
       "name": "Grid Voltage L1",
-      "value": 230.4,
+      "value": 233.9,
       "unit": "V",
-      "address": 627,
+      "address": 598,
       "type": "U_WORD"
     },
     "grid_voltage_l2": {
       "name": "Grid Voltage L2",
-      "value": 229.7,
+      "value": 246.2,
       "unit": "V",
-      "address": 628,
+      "address": 599,
       "type": "U_WORD"
     },
     "grid_voltage_l3": {
       "name": "Grid Voltage L3",
-      "value": 234.3,
+      "value": 233.3,
       "unit": "V",
-      "address": 629,
+      "address": 600,
       "type": "U_WORD"
     },
     "grid_power_l1": {
       "name": "Grid Power L1",
-      "value": 653,
+      "value": 820,
       "unit": "W",
-      "address": 650,
+      "address": 616,
       "type": "S_WORD"
     },
     "grid_power_l2": {
       "name": "Grid Power L2",
-      "value": 898,
+      "value": 832,
       "unit": "W",
-      "address": 651,
+      "address": 617,
       "type": "S_WORD"
     },
     "grid_power_l3": {
       "name": "Grid Power L3",
-      "value": 1841,
+      "value": 825,
       "unit": "W",
-      "address": 652,
+      "address": 618,
       "type": "S_WORD"
     },
     "grid_power": {
       "name": "Grid Power Total",
-      "value": 3505,
-      "unit": "A",
-      "address": 625,
+      "value": 2477,
+      "unit": "W",
+      "address": 619,
       "type": "S_WORD"
     },
     "ups_power_l1": {
       "name": "UPS Power L1",
-      "value": 654,
+      "value": 406,
       "unit": "W",
       "address": 640,
       "type": "S_WORD"
     },
     "ups_power_l2": {
       "name": "UPS Power L2",
-      "value": 898,
+      "value": 634,
       "unit": "W",
       "address": 641,
       "type": "S_WORD"
     },
     "ups_power_l3": {
       "name": "Inverter Power L3",
-      "value": 1792,
+      "value": 1362,
       "unit": "W",
       "address": 642,
       "type": "S_WORD"
     },
     "ups_power_total": {
       "name": "Inverter Power Total",
-      "value": 3344,
+      "value": 2402,
       "unit": "W",
       "address": 643,
       "type": "S_WORD"
     },
     "home_power_l1": {
       "name": "Home Power L1",
-      "value": 646,
+      "value": 406,
       "unit": "W",
       "address": 650,
       "type": "S_WORD"
     },
     "home_power_l2": {
       "name": "Home Power L2",
-      "value": 901,
+      "value": 634,
       "unit": "W",
       "address": 651,
       "type": "S_WORD"
     },
     "home_power_l3": {
       "name": "Home Power L3",
-      "value": 1832,
+      "value": 1362,
       "unit": "W",
       "address": 652,
       "type": "S_WORD"
     },
     "home_power_total": {
       "name": "Home Power Total",
-      "value": 3379,
+      "value": 2402,
       "unit": "W",
       "address": 653,
       "type": "S_WORD"
     },
     "battery_temperature": {
       "name": "Battery Temperature",
-      "value": 21.9,
+      "value": 24.4,
       "unit": "°C",
       "address": 586,
       "type": "U_WORD"
@@ -286,21 +294,21 @@
     },
     "battery_power": {
       "name": "Battery Power",
-      "value": 2,
+      "value": 5,
       "unit": "W",
       "address": 590,
       "type": "S_WORD"
     },
     "battery_current": {
       "name": "Battery Current",
-      "value": -0.0,
+      "value": 0.2,
       "unit": "A",
       "address": 591,
       "type": "S_WORD"
     },
     "battery_charge_total": {
       "name": "Battery Charge Total",
-      "value": 1545.5,
+      "value": 1545.9,
       "unit": "kWh",
       "address": {
         "low": 516,
@@ -310,7 +318,7 @@
     },
     "battery_discharge_total": {
       "name": "Battery Discharge Total",
-      "value": 1397.1,
+      "value": 1397.2,
       "unit": "kWh",
       "address": {
         "low": 518,
@@ -320,7 +328,7 @@
     },
     "battery_charge_daily": {
       "name": "Battery Charge Daily",
-      "value": 0.0,
+      "value": 0.1,
       "unit": "kWh",
       "address": 514,
       "type": "U_WORD"
@@ -369,7 +377,7 @@
     },
     "ac_temperature": {
       "name": "AC Temperature",
-      "value": 42.0,
+      "value": 47.2,
       "unit": "°C",
       "address": 541,
       "type": "S_WORD"
