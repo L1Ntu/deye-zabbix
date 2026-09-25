@@ -1,6 +1,6 @@
 {
-  "timestamp": "2026-09-24T21:16:49.765113",
-  "host": "one.tehnomir.com.ua",
+  "timestamp": "2026-09-25T14:48:57.610533",
+  "host": "deye.local",
   "data": {
     "serial": {
       "name": "Inverter Serial",
@@ -75,7 +75,7 @@
     },
     "today_energy_bought": {
       "name": "Today Energy Bought",
-      "value": 57.6,
+      "value": 38.6,
       "unit": "kWh",
       "address": 76,
       "type": "U_WORD"
@@ -96,7 +96,7 @@
     },
     "total_energy_bought": {
       "name": "Total Energy Bought",
-      "value": 997.5,
+      "value": 1041.1,
       "unit": "kWh",
       "address": 78,
       "type": "U_WORD"
@@ -110,14 +110,14 @@
     },
     "aux_power": {
       "name": "AUX Power",
-      "value": 1,
+      "value": 2,
       "unit": "W",
       "address": 166,
       "type": "S_WORD"
     },
     "grid_voltage_l1": {
       "name": "Grid Voltage L1",
-      "value": 225.3,
+      "value": 215.9,
       "unit": "V",
       "address": 150,
       "type": "U_WORD"
@@ -129,23 +129,37 @@
       "address": 151,
       "type": "U_WORD"
     },
+    "grid_power_l1": {
+      "name": "Grid Power L1",
+      "value": 3620,
+      "unit": "W",
+      "address": 167,
+      "type": "U_WORD"
+    },
+    "grid_power_l2": {
+      "name": "Grid Power L2",
+      "value": 0,
+      "unit": "W",
+      "address": 168,
+      "type": "U_WORD"
+    },
     "grid_power": {
-      "name": "Grid Power",
-      "value": 1810,
+      "name": "Grid Power Total",
+      "value": 3660,
       "unit": "W",
       "address": 169,
       "type": "S_WORD"
     },
     "grid_current": {
       "name": "Grid Current",
-      "value": 10.4,
+      "value": 18.0,
       "unit": "A",
       "address": 160,
       "type": "S_WORD"
     },
     "grid_current_l1": {
       "name": "Grid Current L1",
-      "value": 10.0,
+      "value": 11.0,
       "unit": "A",
       "address": 164,
       "type": "S_WORD"
@@ -164,51 +178,30 @@
       "address": 194,
       "type": "S_WORD"
     },
-    "home_power_l1": {
-      "name": "Load Power L1",
-      "value": 171,
-      "unit": "W",
-      "address": 176,
-      "type": "S_WORD"
-    },
-    "home_power_l2": {
-      "name": "Load Power L2",
-      "value": 0,
-      "unit": "W",
-      "address": 177,
-      "type": "S_WORD"
-    },
-    "home_power_total": {
-      "name": "Home Power Total",
-      "value": 171,
-      "unit": "W",
-      "address": 178,
-      "type": "S_WORD"
-    },
     "battery_temperature": {
       "name": "Battery Temperature",
-      "value": 21.0,
+      "value": 20.0,
       "unit": "°C",
       "address": 182,
       "type": "U_WORD"
     },
     "battery_voltage": {
       "name": "Battery Voltage",
-      "value": 53.4,
+      "value": 53.7,
       "unit": "V",
       "address": 183,
       "type": "U_WORD"
     },
     "battery_soc": {
       "name": "Battery SOC",
-      "value": 99,
+      "value": 100,
       "unit": "%",
       "address": 184,
       "type": "U_WORD"
     },
     "battery_power": {
       "name": "Battery Power",
-      "value": -54,
+      "value": -47,
       "unit": "W",
       "address": 190,
       "type": "S_WORD"
@@ -222,7 +215,7 @@
     },
     "battery_charge_total": {
       "name": "Battery Charge Total",
-      "value": 40.5,
+      "value": 41.4,
       "unit": "kWh",
       "address": {
         "low": 72,
@@ -242,7 +235,7 @@
     },
     "battery_charge_today": {
       "name": "Battery Charge Today",
-      "value": 1.0,
+      "value": 0.7,
       "unit": "kWh",
       "address": 70,
       "type": "U_WORD"
@@ -291,7 +284,7 @@
     },
     "ac_temperature": {
       "name": "AC Temperature",
-      "value": 42.0,
+      "value": 41.3,
       "unit": "°C",
       "address": 91,
       "type": "S_WORD"

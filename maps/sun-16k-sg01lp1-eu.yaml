@@ -140,8 +140,22 @@ registers:
     scale: 0.1
     type: U_WORD
 
+  grid_power_l1:
+    name: Grid Power L1
+    address: 167
+    unit: W
+    scale: 10
+    type: U_WORD
+
+  grid_power_l2:
+    name: Grid Power L2
+    address: 168
+    unit: W
+    scale: 10
+    type: U_WORD
+
   grid_power:
-    name: Grid Power
+    name: Grid Power Total
     address: 169
     description: "- export, + import"
     unit: W

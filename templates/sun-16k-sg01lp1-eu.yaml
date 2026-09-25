@@ -271,13 +271,41 @@ zabbix_export:
               parameters:
                 - '$.data.grid_voltage_l2.value'
 
+        - uuid: 3f5a6b7c8d9e4f1aab3c4d5e6f7a8b9c
+          name: 'Grid Power L1'
+          type: DEPENDENT
+          key: 'deye.sg01lp1.grid_power_l1'
+          value_type: UNSIGNED
+          units: W
+          description: 'Grid Power Phase 1'
+          master_item:
+            key: 'deye.16k-sg01lp1'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$.data.grid_power_l1.value'
+
+        - uuid: e7f1a2b3c4d54e6fa8b9c0d1e2f3a4b5
+          name: 'Grid Power L2'
+          type: DEPENDENT
+          key: 'deye.sg01lp1.grid_power_l2'
+          value_type: UNSIGNED
+          units: W
+          description: 'Grid Power Phase 2'
+          master_item:
+            key: 'deye.16k-sg01lp1'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$.data.grid_power_l2.value'
+
         - uuid: 2040cab27c1e4b2bbd2fb7f59300b2a7
-          name: 'Grid Power'
+          name: 'Grid Power Total'
           type: DEPENDENT
           key: 'deye.sg01lp1.grid_power'
           value_type: FLOAT
           units: W
-          description: 'Grid Power Exchange (negative=export, positive=import)'
+          description: 'Grid Power Total (negative=export, positive=import)'
           master_item:
             key: 'deye.16k-sg01lp1'
           preprocessing:
