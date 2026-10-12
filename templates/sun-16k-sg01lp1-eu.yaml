@@ -374,6 +374,49 @@ zabbix_export:
               parameters:
                 - '$.data.grid_current.value'
 
+        # UPS Data
+        - uuid: 16b15dd78e82435aaefeee9b631d7626
+          name: 'UPS Power L1'
+          type: DEPENDENT
+          key: 'deye.sg01lp1.ups_power_l1'
+          value_type: FLOAT
+          units: W
+          description: 'UPS Power L1'
+          master_item:
+            key: 'deye.16k-sg01lp1'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$.data.ups_power_l1.value'
+
+        - uuid: 63dff76681cb4b7e8e3381cb23699c99
+          name: 'UPS Power L2'
+          type: DEPENDENT
+          key: 'deye.sg01lp1.ups_power_l2'
+          value_type: FLOAT
+          units: W
+          description: 'UPS Power L2'
+          master_item:
+            key: 'deye.16k-sg01lp1'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$.data.ups_power_l2.value'
+
+        - uuid: 57e40cac3a73493f8b78144ec3cc950a
+          name: 'UPS Power Total'
+          type: DEPENDENT
+          key: 'deye.sg01lp1.ups_power_total'
+          value_type: UNSIGNED
+          units: W
+          description: 'UPS Power Total'
+          master_item:
+            key: 'deye.16k-sg01lp1'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$.data.ups_power_total.value'
+
         # Battery Data
         - uuid: f446e3a1b39e49cfb3d22e5eb6c0e845
           name: 'Battery Temperature'

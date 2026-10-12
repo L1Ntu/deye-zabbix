@@ -141,7 +141,7 @@ registers:
     type: U_WORD
 
 
-#  ####### AUX / GEN #######
+  ####### AUX / GEN #######
 
   gen_voltage_l1:
     name: Generator Voltage L1
@@ -244,14 +244,14 @@ registers:
     type: S_WORD
 
   ups_power_l3:
-    name: Inverter Power L3
+    name: UPS Power L3
     address: 642
     unit: W
     scale: 1
     type: S_WORD
 
   ups_power_total:
-    name: Inverter Power Total
+    name: UPS Power Total
     address: 643
     unit: W
     scale: 1

@@ -191,6 +191,30 @@ registers:
     type: S_WORD
 
 
+  ####### USP #######
+
+  ups_power_l1:
+    name: UPS Power L1
+    address: 179
+    unit: W
+    scale: 10
+    type: S_WORD
+
+  ups_power_l2:
+    name: UPS Power L2
+    address: 180
+    unit: W
+    scale: 10
+    type: S_WORD
+
+  ups_power_total:
+    name: UPS Power Total
+    address: 178
+    unit: W
+    scale: 10
+    type: U_WORD
+
+
   ####### BATTERY #######
 
   battery_temperature:

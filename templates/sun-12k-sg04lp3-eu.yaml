@@ -425,6 +425,22 @@ zabbix_export:
               parameters:
                 - '$.data.grid_power.value'
 
+        # deye.sg04lp3.grid_voltage_l1
+        - uuid: de6413eb2c974b869b60802fb4b513a8
+          name: 'Grid Connected Status'
+          description: 'Grid Connection Status (1=Connected, 0=Disconnected)'
+          type: CALCULATED
+          key: 'deye.sg04lp3.grid_connected_status'
+          value_type: UNSIGNED
+          params: 'min(last(//deye.sg04lp3.grid_voltage_l1),last(//deye.sg04lp3.grid_voltage_l2),last(//deye.sg04lp3.grid_voltage_l3))>=180'
+          triggers:
+            - uuid: 773a60192e444d3cbd9b373b1379976b
+              name: 'Grid disconnected'
+              expression: 'last(/DEYE-12K-SG04LP3-EU/deye.sg04lp3.grid_connected_status)=0'
+              priority: WARNING
+              description: 'Alert when grid connection is lost (0=Disconnected)'
+
+
         # UPS Load Data
         - uuid: b0d3ec10206643f7b245d213d6c42553
           name: 'UPS Power L1'
