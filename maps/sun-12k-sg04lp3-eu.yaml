@@ -386,6 +386,27 @@ registers:
     scale: 1
     type: U_WORD
 
+  battery_shutdown:
+    name: Battery Shutdown
+    address: 115
+    unit: '%'
+    scale: 1
+    type: U_WORD
+
+  battery_restart:
+    name: Battery Restart
+    address: 116
+    unit: '%'
+    scale: 1
+    type: U_WORD
+
+  battery_low:
+    name: Battery Low
+    address: 117
+    unit: '%'
+    scale: 1
+    type: U_WORD
+
 
   ###### TEMPERATURE #######
 

@@ -252,7 +252,7 @@ registers:
     note: "- charge ; + discharge"
     address: 191
     unit: A
-    scale: 0.01
+    scale: 0.1
     type: S_WORD
 
   battery_charge_total:
@@ -312,6 +312,27 @@ registers:
     name: Battery Max Discharge
     address: 211
     unit: 'A'
+    scale: 1
+    type: U_WORD
+
+  battery_shutdown:
+    name: Battery Shutdown
+    address: 217
+    unit: '%'
+    scale: 1
+    type: U_WORD
+
+  battery_restart:
+    name: Battery Restart
+    address: 218
+    unit: '%'
+    scale: 1
+    type: U_WORD
+
+  battery_low:
+    name: Battery Low
+    address: 219
+    unit: '%'
     scale: 1
     type: U_WORD
 

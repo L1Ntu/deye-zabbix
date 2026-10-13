@@ -600,6 +600,48 @@ zabbix_export:
               parameters:
                 - '$.data.battery_max_discharge.value'
 
+        - uuid: 3c27fa0f502949ab8bf648650e61d4a5
+          name: 'Battery Shutdown'
+          type: DEPENDENT
+          key: 'deye.sg01lp1.battery_shutdown'
+          value_type: UNSIGNED
+          units: '%'
+          description: 'Battery Shutdown'
+          master_item:
+            key: 'deye.16k-sg01lp1'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$.data.battery_shutdown.value'
+
+        - uuid: 232d05364f4247d7a9069d38b34bea9d
+          name: 'Battery Restart'
+          type: DEPENDENT
+          key: 'deye.sg01lp1.battery_restart'
+          value_type: UNSIGNED
+          units: '%'
+          description: 'Battery Restart'
+          master_item:
+            key: 'deye.16k-sg01lp1'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$.data.battery_restart.value'
+
+        - uuid: 27f6d5e7cf264a63a7baeb17834e1611
+          name: 'Battery Low'
+          type: DEPENDENT
+          key: 'deye.sg01lp1.battery_low'
+          value_type: UNSIGNED
+          units: '%'
+          description: 'Battery Low'
+          master_item:
+            key: 'deye.16k-sg01lp1'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$.data.battery_low.value'
+
         # Temperature Data
         - uuid: fe588df1db8d457693fdd0db2464d04e
           name: 'DC Temperature'
