@@ -241,6 +241,12 @@ zabbix_export:
             - type: JSONPATH
               parameters:
                 - '$.data.aux_power.value'
+          triggers:
+            - uuid: 1c3ccf652bd2414a93b891aed03f9899
+              name: 'Generator is not working'
+              expression: 'last(/DEYE-16K-SG01LP1-EU/deye.sg01lp1.grid_connected_status)=0 and last(/DEYE-16K-SG01LP1-EU/deye.sg01lp1.aux_power)<1000 and last(/DEYE-16K-SG01LP1-EU/deye.sg01lp1.battery_soc)<80'
+              priority: WARNING
+              description: 'Grid is disconnected, AUX (generator) power is below 1000W and battery SOC is below 80%'
 
         # Grid Data
         - uuid: 830c123b36074e49a0c68d140a4ec5bf
