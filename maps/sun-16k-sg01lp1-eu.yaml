@@ -22,6 +22,16 @@ registers:
       3: alarm
       4: fault
 
+  work_mode:
+    name: Work Mode
+    address: 244
+    unit: ''
+    scale: 1
+    type: U_WORD
+    options:
+      1: Export First
+      2: Zero Export To Load
+      3: Zero Export To CT
 
   ####### SOLAR #######
 
