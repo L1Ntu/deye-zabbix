@@ -416,7 +416,7 @@ zabbix_export:
           type: DEPENDENT
           key: 'deye.sg04lp3.grid_power'
           value_type: FLOAT
-          units: A
+          units: W
           description: 'Grid Power Exchange Total'
           master_item:
             key: 'deye.12k-sg04lp3'
