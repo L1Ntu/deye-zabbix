@@ -126,8 +126,8 @@ registers:
 
   ####### AUX / GEN #######
 
-  aux_power:
-    name: AUX Power
+  gen_power_total:
+    name: Generator Total Power
     address: 166
     unit: W
     scale: 1

@@ -227,26 +227,26 @@ zabbix_export:
               parameters:
                 - '$.data.total_energy_sold.value'
 
-        # AUX Data
+        # Generator Data
         - uuid: 1a6bef492c5c4ce6ba499dad60b659db
-          name: 'AUX Power'
+          name: 'Generator Total Power'
           type: DEPENDENT
-          key: 'deye.sg01lp1.aux_power'
+          key: 'deye.sg01lp1.gen_power_total'
           value_type: FLOAT
           units: W
-          description: 'AUX Power Output'
+          description: 'Generator Total Power'
           master_item:
             key: 'deye.16k-sg01lp1'
           preprocessing:
             - type: JSONPATH
               parameters:
-                - '$.data.aux_power.value'
+                - '$.data.gen_total_power.value'
           triggers:
             - uuid: 1c3ccf652bd2414a93b891aed03f9899
               name: 'Generator is not working'
-              expression: 'last(/DEYE-16K-SG01LP1-EU/deye.sg01lp1.grid_connected_status)=0 and last(/DEYE-16K-SG01LP1-EU/deye.sg01lp1.aux_power)<1000 and last(/DEYE-16K-SG01LP1-EU/deye.sg01lp1.battery_soc)<80'
+              expression: 'last(/DEYE-16K-SG01LP1-EU/deye.sg01lp1.grid_connected_status)=0 and last(/DEYE-16K-SG01LP1-EU/deye.sg01lp1.gen_total_power)<1000 and last(/DEYE-16K-SG01LP1-EU/deye.sg01lp1.battery_soc)<80'
               priority: WARNING
-              description: 'Grid is disconnected, AUX (generator) power is below 1000W and battery SOC is below 80%'
+              description: 'Grid is disconnected, gen power is below 1000W and battery SOC is below threshold'
 
         # Grid Data
         - uuid: 830c123b36074e49a0c68d140a4ec5bf
