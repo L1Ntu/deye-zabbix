@@ -325,6 +325,12 @@ zabbix_export:
             - type: JSONPATH
               parameters:
                 - '$.data.gen_power_total.value'
+          triggers:
+            - uuid: 62d7e5eac9e4448f96cf607a68e18e10
+              name: 'Generator is not working'
+              expression: 'last(/DEYE-12K-SG04LP3-EU/deye.sg04lp3.grid_connected_status)=0 and last(/DEYE-12K-SG04LP3-EU/deye.sg04lp3.gen_power_total)<1000 and last(/DEYE-12K-SG04LP3-EU/deye.sg04lp3.battery_soc)<{$BATTERY_SOC_THRESHOLD}'
+              priority: WARNING
+              description: 'Grid is disconnected, gen power is below 1000W and battery SOC is below threshold'
 
         # Grid Data
         - uuid: 33918518a1e8429182b0d47c60e25208
@@ -569,6 +575,12 @@ zabbix_export:
             - type: JSONPATH
               parameters:
                 - '$.data.battery_temperature.value'
+          triggers:
+            - uuid: 5ff82f069eff4a8eadf77b54871dd3c5
+              name: 'Battery temperature out of range'
+              expression: 'last(/DEYE-12K-SG04LP3-EU/deye.sg04lp3.battery_temperature)<{$BATTERY_TEMP_MIN} or last(/DEYE-12K-SG04LP3-EU/deye.sg04lp3.battery_temperature)>{$BATTERY_TEMP_MAX}'
+              priority: HIGH
+              description: 'Battery temperature is below {$BATTERY_TEMP_MIN} or above {$BATTERY_TEMP_MAX} °C'
 
         - uuid: 7e050c2727e7446dbd9b892a14ca03e7
           name: 'Battery Voltage'
@@ -809,6 +821,16 @@ zabbix_export:
               parameters:
                 - '$.data.ac_temperature.value'
 
+      macros:
+        - macro: '{$BATTERY_SOC_THRESHOLD}'
+          value: '30'
+          description: 'Battery SOC threshold (%) used in trigger conditions'
+        - macro: '{$BATTERY_TEMP_MIN}'
+          value: '15'
+          description: 'Minimum allowed battery temperature (°C)'
+        - macro: '{$BATTERY_TEMP_MAX}'
+          value: '30'
+          description: 'Maximum allowed battery temperature (°C)'
       valuemaps:
         -
           uuid: 1b2ffd65761541e893a9830f6cceb20c

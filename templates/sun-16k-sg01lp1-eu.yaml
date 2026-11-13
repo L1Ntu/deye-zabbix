@@ -240,11 +240,11 @@ zabbix_export:
           preprocessing:
             - type: JSONPATH
               parameters:
-                - '$.data.gen_total_power.value'
+                - '$.data.gen_power_total.value'
           triggers:
             - uuid: 1c3ccf652bd2414a93b891aed03f9899
               name: 'Generator is not working'
-              expression: 'last(/DEYE-16K-SG01LP1-EU/deye.sg01lp1.grid_connected_status)=0 and last(/DEYE-16K-SG01LP1-EU/deye.sg01lp1.gen_total_power)<1000 and last(/DEYE-16K-SG01LP1-EU/deye.sg01lp1.battery_soc)<80'
+              expression: 'last(/DEYE-16K-SG01LP1-EU/deye.sg01lp1.grid_connected_status)=0 and last(/DEYE-16K-SG01LP1-EU/deye.sg01lp1.gen_power_total)<1000 and last(/DEYE-16K-SG01LP1-EU/deye.sg01lp1.battery_soc)<{$BATTERY_SOC_THRESHOLD}'
               priority: WARNING
               description: 'Grid is disconnected, gen power is below 1000W and battery SOC is below threshold'
 
@@ -437,6 +437,12 @@ zabbix_export:
             - type: JSONPATH
               parameters:
                 - '$.data.battery_temperature.value'
+          triggers:
+            - uuid: e335d58e5d3d47a7935acc376fe626ed
+              name: 'Battery temperature out of range'
+              expression: 'last(/DEYE-16K-SG01LP1-EU/deye.sg01lp1.battery_temperature)<{$BATTERY_TEMP_MIN} or last(/DEYE-16K-SG01LP1-EU/deye.sg01lp1.battery_temperature)>{$BATTERY_TEMP_MAX}'
+              priority: HIGH
+              description: 'Battery temperature is below {$BATTERY_TEMP_MIN} or above {$BATTERY_TEMP_MAX} °C'
 
         - uuid: 4cd7747c73ee429da7f6dd8389452f15
           name: 'Battery Voltage'
@@ -676,6 +682,16 @@ zabbix_export:
             - type: JSONPATH
               parameters:
                 - '$.data.ac_temperature.value'
+      macros:
+        - macro: '{$BATTERY_SOC_THRESHOLD}'
+          value: '50'
+          description: 'Battery SOC threshold (%) used in trigger conditions'
+        - macro: '{$BATTERY_TEMP_MIN}'
+          value: '15'
+          description: 'Minimum allowed battery temperature (°C)'
+        - macro: '{$BATTERY_TEMP_MAX}'
+          value: '30'
+          description: 'Maximum allowed battery temperature (°C)'
       valuemaps:
         -
           uuid: 630195889c074660a0e1c9eba1b6f597
